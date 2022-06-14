@@ -37,9 +37,6 @@ dependencies {
 
     implementation(group: 'org.asciidoctor', name: 'asciidoctorj', version: '2.5.0')
 
-    annotationProcessor("com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa")
-    annotationProcessor("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
-
     annotationProcessor('org.projectlombok:lombok')
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 

@@ -11,15 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Group extends CommonEntity {
+public class MemberGroup extends CommonEntity {
 
-    @Id
+    @Id @Column(name = "member_group_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 100)
     private String name;
 
-    @OneToMany(mappedBy = "group", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "memberGroup", cascade = CascadeType.REMOVE)
     private List<GroupMember> groupMembers = new ArrayList<>();
 }
