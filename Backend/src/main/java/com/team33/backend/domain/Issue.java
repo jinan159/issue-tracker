@@ -11,6 +11,7 @@ public class Issue extends CommonEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 60)
     private String title;
 
     @Enumerated(EnumType.STRING)

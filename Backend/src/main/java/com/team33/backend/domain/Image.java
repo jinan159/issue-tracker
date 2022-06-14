@@ -8,8 +8,11 @@ public class Image {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Issue issue;
+    @Column(length = 4096)
+    private String fileName;
+
+    @Column(length = 2048)
+    private String url;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "comment_id")
