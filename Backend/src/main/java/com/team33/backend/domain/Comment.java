@@ -11,7 +11,7 @@ public class Comment extends CommonEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 65535)
+    @Lob
     private String content;
 
     @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
