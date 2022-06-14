@@ -9,9 +9,10 @@ public class Assignee {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "issue_ie")
+    @JoinColumn(name = "issue_id")
     private Issue issue;
 }
