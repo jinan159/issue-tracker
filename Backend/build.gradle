@@ -1,6 +1,7 @@
 buildscript {
     ext {
         queryDslVersion = "5.0.0"
+        snippetsDir = file("build/generated-snippets")
     }
 }
 
@@ -36,7 +37,7 @@ dependencies {
 
     implementation(group: 'org.asciidoctor', name: 'asciidoctorj', version: '2.5.0')
 
-    annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
+    annotationProcessor("com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa")
     annotationProcessor("com.querydsl:querydsl-apt:${queryDslVersion}:jpa")
 
     annotationProcessor('org.projectlombok:lombok')
@@ -48,6 +49,7 @@ dependencies {
     compileOnly("org.projectlombok:lombok")
 
     testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation('org.springframework.restdocs:spring-restdocs-mockmvc')
 }
 
 jar {
@@ -58,6 +60,8 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+// --------------------
+// QueryDSL 설정
 def querydslDir = "$buildDir/generated/querydsl"
 
 querydsl {
@@ -78,4 +82,27 @@ configurations {
 
 compileQuerydsl {
     options.annotationProcessorPath = configurations.querydsl
+}
+
+// --------------------
+// Spring Restdocs 설정
+test {
+    useJUnitPlatform()
+}
+
+asciidoctor {
+    inputs.dir snippetsDir
+    dependsOn test
+}
+
+asciidoctor.doFirst {
+    delete file('src/main/resources/static/docs')
+}
+
+bootJar {
+    dependsOn asciidoctor
+    copy {
+        from './build/docs/asciidoc'
+        into './build/resources/main/static/docs'
+    }
 }
