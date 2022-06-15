@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class MemberGroup extends CommonEntity {
+public class IssueGroup extends CommonEntity {
 
     @Id @Column(name = "member_group_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +20,6 @@ public class MemberGroup extends CommonEntity {
     @Column(length = 100)
     private String name;
 
-    @OneToMany(mappedBy = "memberGroup", cascade = CascadeType.REMOVE)
-    private List<GroupMember> groupMembers = new ArrayList<>();
+    @OneToMany(mappedBy = "issueGroup", cascade = CascadeType.REMOVE)
+    private List<IssueGroupMember> issueGroupMembers = new ArrayList<>();
 }

@@ -11,7 +11,7 @@ create table comment
     id               bigint not null auto_increment,
     created_at       datetime(6),
     last_modified_at datetime(6),
-    content          longtext,
+    content          blob,
     issue_id         bigint,
     member_id        bigint,
     primary key (id)
@@ -22,14 +22,6 @@ create table emoji
     id         bigint not null auto_increment,
     emotion    varchar(4),
     comment_id bigint,
-    primary key (id)
-) engine = InnoDB;
-
-create table group_member
-(
-    id        bigint not null auto_increment,
-    member_id bigint,
-    group_id  bigint,
     primary key (id)
 ) engine = InnoDB;
 
@@ -53,6 +45,23 @@ create table issue
     primary key (id)
 ) engine = InnoDB;
 
+create table issue_group
+(
+    member_group_id  bigint not null auto_increment,
+    created_at       datetime(6),
+    last_modified_at datetime(6),
+    name             varchar(100),
+    primary key (member_group_id)
+) engine = InnoDB;
+
+create table issue_group_member
+(
+    id        bigint not null auto_increment,
+    group_id  bigint,
+    member_id bigint,
+    primary key (id)
+) engine = InnoDB;
+
 create table label
 (
     id          bigint not null auto_increment,
@@ -69,15 +78,6 @@ create table member
     name              varchar(39),
     profile_image_url varchar(2048),
     primary key (id)
-) engine = InnoDB;
-
-create table member_group
-(
-    member_group_id  bigint not null auto_increment,
-    created_at       datetime(6),
-    last_modified_at datetime(6),
-    name             varchar(100),
-    primary key (member_group_id)
 ) engine = InnoDB;
 
 create table milestone
@@ -116,16 +116,6 @@ alter table emoji
         foreign key (comment_id)
             references comment (id);
 
-alter table group_member
-    add constraint FKeamf7nngsg582uxwqgde8o28x
-        foreign key (member_id)
-            references member (id);
-
-alter table group_member
-    add constraint FK4if69kgijmtu6wa8jh8a19mwf
-        foreign key (group_id)
-            references member_group (member_group_id);
-
 alter table image
     add constraint FK973ib8k6ri8g8nlfi6i52mpo6
         foreign key (comment_id)
@@ -136,7 +126,17 @@ alter table issue
         foreign key (milestone_id)
             references milestone (id);
 
+alter table issue_group_member
+    add constraint FKqc3jm6fx63rro519b6ct65fxa
+        foreign key (group_id)
+            references issue_group (member_group_id);
+
+alter table issue_group_member
+    add constraint FKbm4pahukx6ce1vwst53y75sc9
+        foreign key (member_id)
+            references member (id);
+
 alter table label
     add constraint FKskssx8qtjj0fkn678hop4flwx
         foreign key (issue_id)
-            references issue (id)
+            references issue (id);

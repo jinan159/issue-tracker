@@ -9,7 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class GroupMember {
+public class IssueGroupMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +17,7 @@ public class GroupMember {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "group_id")
-    private MemberGroup memberGroup;
+    private IssueGroup issueGroup;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
