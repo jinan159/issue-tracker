@@ -14,12 +14,20 @@ public class Issue extends CommonEntity {
     @Column(length = 60)
     private String title;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    private Member author;
+
     @Enumerated(EnumType.STRING)
     private IssueStatus issueStatus;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "milestone_id")
     private Milestone milestone;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "issue_group_id")
+    private IssueGroup issueGroup;
 
     @OneToMany(mappedBy = "issue")
     private List<Assignee> assignees = new ArrayList<>();
