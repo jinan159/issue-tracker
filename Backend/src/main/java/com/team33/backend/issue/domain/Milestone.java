@@ -24,7 +24,7 @@ public class Milestone extends CommonEntity {
     @Column(length = 8192)
     private String description;
 
-    private LocalDate deadLine;
+    private LocalDate deadline;
 
     @Override
     public boolean equals(Object o) {
