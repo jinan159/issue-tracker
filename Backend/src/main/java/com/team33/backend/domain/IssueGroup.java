@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 public class IssueGroup extends CommonEntity {
 
-    @Id @Column(name = "member_group_id")
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
