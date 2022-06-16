@@ -21,5 +21,5 @@ public class Milestone extends CommonEntity {
     @Column(length = 8192)
     private String description;
 
-    private LocalDate dueDate;
+    private LocalDate deadLine;
 }
