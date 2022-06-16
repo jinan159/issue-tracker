@@ -1,4 +1,9 @@
-package com.team33.backend.domain;
+package com.team33.backend.issue.domain;
+
+import com.team33.backend.comment.Comment;
+import com.team33.backend.common.CommonEntity;
+import com.team33.backend.group.IssueGroup;
+import com.team33.backend.member.Member;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

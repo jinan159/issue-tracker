@@ -1,6 +1,14 @@
-package com.team33.backend.domain;
+package com.team33.backend.issue.domain;
 
-import javax.persistence.*;
+import com.team33.backend.member.Member;
+
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 @Entity

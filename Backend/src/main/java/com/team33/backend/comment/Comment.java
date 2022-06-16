@@ -1,4 +1,10 @@
-package com.team33.backend.domain;
+package com.team33.backend.comment;
+
+import com.team33.backend.common.CommonEntity;
+import com.team33.backend.emoji.Emoji;
+import com.team33.backend.image.Image;
+import com.team33.backend.issue.domain.Issue;
+import com.team33.backend.member.Member;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

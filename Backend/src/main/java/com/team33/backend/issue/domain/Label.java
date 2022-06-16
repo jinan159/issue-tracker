@@ -1,36 +1,35 @@
-package com.team33.backend.domain;
+package com.team33.backend.issue.domain;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class IssueGroup extends CommonEntity {
+public class Label {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100)
+    @Column(length = 50)
     @NotBlank
     private String name;
 
-    @OneToMany(mappedBy = "issueGroup", cascade = CascadeType.REMOVE)
-    private List<IssueGroupMember> issueGroupMembers = new ArrayList<>();
+    @Column(length = 100)
+    private String description;
+
+    @Column(length = 6, columnDefinition = "char(6)")
+    @NotBlank
+    private String color;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof IssueGroup)) return false;
-        IssueGroup entity = (IssueGroup) o;
+        if (!(o instanceof Label)) return false;
+        Label entity = (Label) o;
         return Objects.equals(id, entity.id);
     }
 

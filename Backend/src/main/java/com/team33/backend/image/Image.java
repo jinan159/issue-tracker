@@ -1,4 +1,7 @@
-package com.team33.backend.domain;
+package com.team33.backend.image;
+
+import com.team33.backend.comment.Comment;
+import com.team33.backend.issue.domain.Issue;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

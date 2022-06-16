@@ -1,6 +1,5 @@
-package com.team33.backend.domain;
+package com.team33.backend.issue.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,24 +10,25 @@ import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 @Entity
-public class Emoji {
+public class IssueLabel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 4)
-    private String emotion;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "issue_id", nullable = false)
+    private Issue issue;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "comment_id", nullable = false)
-    private Comment comment;
+    @JoinColumn(name = "label_id", nullable = false)
+    private Label label;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Emoji)) return false;
-        Emoji entity = (Emoji) o;
+        if (!(o instanceof IssueLabel)) return false;
+        IssueLabel entity = (IssueLabel) o;
         return Objects.equals(id, entity.id);
     }
 

@@ -1,4 +1,6 @@
-package com.team33.backend.domain;
+package com.team33.backend.member;
+
+import com.team33.backend.group.IssueGroup;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,25 +12,25 @@ import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 @Entity
-public class IssueLabel {
+public class IssueGroupMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "issue_id", nullable = false)
-    private Issue issue;
+    @JoinColumn(name = "group_id", nullable = false)
+    private IssueGroup issueGroup;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "label_id", nullable = false)
-    private Label label;
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof IssueLabel)) return false;
-        IssueLabel entity = (IssueLabel) o;
+        if (!(o instanceof IssueGroupMember)) return false;
+        IssueGroupMember entity = (IssueGroupMember) o;
         return Objects.equals(id, entity.id);
     }
 
