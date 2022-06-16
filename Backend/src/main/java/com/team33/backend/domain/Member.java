@@ -9,6 +9,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Member {
@@ -25,4 +26,17 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     private List<Issue> issues = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Member)) return false;
+        Member entity = (Member) o;
+        return Objects.equals(id, entity.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

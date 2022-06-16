@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
+import java.util.Objects;
 
 @Entity
 public class Label {
@@ -23,4 +24,17 @@ public class Label {
     @Column(length = 6, columnDefinition = "char(6)")
     @NotBlank
     private String color;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Label)) return false;
+        Label entity = (Label) o;
+        return Objects.equals(id, entity.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

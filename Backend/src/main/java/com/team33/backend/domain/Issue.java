@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Issue extends CommonEntity {
@@ -48,4 +49,17 @@ public class Issue extends CommonEntity {
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Issue)) return false;
+        Issue entity = (Issue) o;
+        return Objects.equals(id, entity.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

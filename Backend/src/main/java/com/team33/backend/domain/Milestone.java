@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 public class Milestone extends CommonEntity {
@@ -22,4 +23,17 @@ public class Milestone extends CommonEntity {
     private String description;
 
     private LocalDate deadLine;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Milestone)) return false;
+        Milestone entity = (Milestone) o;
+        return Objects.equals(id, entity.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

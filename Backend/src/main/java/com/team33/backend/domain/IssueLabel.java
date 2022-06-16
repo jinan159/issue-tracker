@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.util.Objects;
 
 @Entity
 public class IssueLabel {
@@ -22,4 +23,17 @@ public class IssueLabel {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "label_id", nullable = false)
     private Label label;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof IssueLabel)) return false;
+        IssueLabel entity = (IssueLabel) o;
+        return Objects.equals(id, entity.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
