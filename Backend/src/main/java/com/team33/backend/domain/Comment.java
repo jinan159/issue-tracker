@@ -1,6 +1,7 @@
 package com.team33.backend.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,17 +13,18 @@ public class Comment extends CommonEntity {
     private Long id;
 
     @Lob
+    @NotBlank
     private String content;
 
     @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
     private List<Image> images = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "issue_id")
+    @JoinColumn(name = "issue_id", nullable = false)
     private Issue issue;
 
     @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
