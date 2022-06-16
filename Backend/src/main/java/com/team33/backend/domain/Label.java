@@ -1,6 +1,10 @@
 package com.team33.backend.domain;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -19,8 +23,4 @@ public class Label {
     @Column(length = 6, columnDefinition = "char(6)")
     @NotBlank
     private String color;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "issue_id")
-    private Issue issue;
 }
