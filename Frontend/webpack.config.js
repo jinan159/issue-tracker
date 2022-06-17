@@ -1,12 +1,11 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require('path');
 
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const dotenv = require('dotenv');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
 dotenv.config();
-
-const path = require('path');
 
 module.exports = {
   mode: 'development',
