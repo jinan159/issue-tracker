@@ -26,7 +26,7 @@ public class Member {
     @Column(length = 2048)
     private String profileImageUrl;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "author")
     private List<Issue> issues = new ArrayList<>();
 
     @Override
