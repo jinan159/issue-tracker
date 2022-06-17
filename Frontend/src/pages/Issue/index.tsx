@@ -1,5 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 
 export default function Issue() {
   const params = useParams();
