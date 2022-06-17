@@ -1,4 +1,4 @@
-package com.team33.backend.domain;
+package com.team33.backend.issue.domain;
 
 public enum IssueStatus {
     OPEN,
