@@ -3,7 +3,10 @@ import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
-
+  body {
+    padding: 0 100px;
+  }
+  
   input {
     border: none;
     outline: none;
