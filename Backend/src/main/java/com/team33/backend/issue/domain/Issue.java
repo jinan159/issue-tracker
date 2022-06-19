@@ -5,6 +5,7 @@ import com.team33.backend.common.CommonEntity;
 import com.team33.backend.emoji.Emoji;
 import com.team33.backend.group.IssueGroup;
 import com.team33.backend.member.Member;
+import lombok.Getter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Getter
 public class Issue extends CommonEntity {
 
     @Id
@@ -56,7 +58,7 @@ public class Issue extends CommonEntity {
     @OneToMany(mappedBy = "issue", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "issue", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "issue", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Emoji> emojis = new ArrayList<>();
 
     @Override

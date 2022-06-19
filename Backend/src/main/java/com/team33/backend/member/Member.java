@@ -1,6 +1,7 @@
 package com.team33.backend.member;
 
 import com.team33.backend.issue.domain.Issue;
+import lombok.Getter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Getter
 public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -5,6 +5,7 @@ import com.team33.backend.emoji.Emoji;
 import com.team33.backend.image.Image;
 import com.team33.backend.issue.domain.Issue;
 import com.team33.backend.member.Member;
+import lombok.Getter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Getter
 public class Comment extends CommonEntity {
 
     @Id

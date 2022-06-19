@@ -1,6 +1,7 @@
 package com.team33.backend.issue.domain;
 
 import com.team33.backend.common.CommonEntity;
+import lombok.Getter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
+@Getter
 public class Milestone extends CommonEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
