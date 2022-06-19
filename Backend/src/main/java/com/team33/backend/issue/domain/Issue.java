@@ -2,6 +2,7 @@ package com.team33.backend.issue.domain;
 
 import com.team33.backend.comment.Comment;
 import com.team33.backend.common.CommonEntity;
+import com.team33.backend.emoji.Emoji;
 import com.team33.backend.group.IssueGroup;
 import com.team33.backend.member.Member;
 
@@ -54,6 +55,9 @@ public class Issue extends CommonEntity {
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "issue", cascade = CascadeType.REMOVE)
+    private List<Emoji> emojis = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
