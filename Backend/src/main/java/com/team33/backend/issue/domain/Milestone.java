@@ -16,7 +16,8 @@ import java.util.Objects;
 @Getter
 public class Milestone extends CommonEntity {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 255)
@@ -27,6 +28,15 @@ public class Milestone extends CommonEntity {
     private String description;
 
     private LocalDate deadline;
+
+    public Milestone(String title, String description, LocalDate deadline) {
+        this.title = title;
+        this.description = description;
+        this.deadline = deadline;
+    }
+
+    protected Milestone() {
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -39,5 +49,42 @@ public class Milestone extends CommonEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public void editMilestone(String title, String description, LocalDate deadline) {
+        editTitle(title);
+        editDescription(description);
+        editDeadline(deadline);
+    }
+
+    private void editTitle(String title) {
+        if (title != null && title.length() >= 1) {
+            this.title = title;
+            return;
+        }
+        if (title == null) {
+            throw new IllegalArgumentException("제목을 입력해주세요.");
+        }
+    }
+
+    private void editDescription(String description) {
+        if (description != null && description.length() >= 1) {
+            this.description = description;
+            return;
+        }
+        if (description == null) {
+            throw new IllegalArgumentException("내용을 입력해주세요.");
+        }
+    }
+
+    private void editDeadline(LocalDate deadline) {
+        if (deadline != null) {
+            this.deadline = deadline;
+            return;
+        }
+        throw new IllegalArgumentException("마감일을 입력해주세요.");
+    }
+
+    public void delete() {
     }
 }

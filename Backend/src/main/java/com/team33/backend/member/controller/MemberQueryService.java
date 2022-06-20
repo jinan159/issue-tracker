@@ -1,6 +1,5 @@
 package com.team33.backend.member.controller;
 
-import com.team33.backend.comment.service.MemberRepository;
 import com.team33.backend.member.controller.dto.MemberQueryResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

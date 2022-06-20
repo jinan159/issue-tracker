@@ -27,6 +27,9 @@ public class Member {
     @NotBlank
     private String name;
 
+    @NotBlank
+    private String githubId;
+
     @Column(length = 2048)
     private String profileImageUrl;
 

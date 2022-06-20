@@ -1,4 +1,4 @@
-package com.team33.backend.comment.service;
+package com.team33.backend.issue.repository;
 
 import com.team33.backend.issue.domain.Issue;
 import org.springframework.data.jpa.repository.JpaRepository;

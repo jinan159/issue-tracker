@@ -1,4 +1,4 @@
-package com.team33.backend.emoji;
+package com.team33.backend.emoji.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 

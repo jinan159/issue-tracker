@@ -1,4 +1,4 @@
-package com.team33.backend.comment.service;
+package com.team33.backend.comment.repository;
 
 import com.team33.backend.comment.domain.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;

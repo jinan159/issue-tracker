@@ -3,8 +3,11 @@ package com.team33.backend.comment.service;
 import com.team33.backend.comment.domain.Comment;
 import com.team33.backend.comment.controller.dto.CommentEditRequest;
 import com.team33.backend.comment.controller.dto.CommentWriteRequest;
+import com.team33.backend.comment.repository.CommentRepository;
 import com.team33.backend.issue.domain.Issue;
+import com.team33.backend.issue.repository.IssueRepository;
 import com.team33.backend.member.domain.Member;
+import com.team33.backend.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +19,7 @@ public class CommentService {
     private final MemberRepository memberRepository;
     private final CommentRepository commentRepository;
     private final IssueRepository issueRepository;
+    private final CacheService cacheService;
 
     @Transactional
     public Comment writeComment(String githubId, CommentWriteRequest request) {
