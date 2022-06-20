@@ -1,6 +1,7 @@
-package com.team33.backend.member.controller;
+package com.team33.backend.member.service;
 
 import com.team33.backend.member.controller.dto.MemberQueryResponse;
+import com.team33.backend.member.repository.query.MemberQueryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

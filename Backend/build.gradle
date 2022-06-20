@@ -39,6 +39,8 @@ dependencies {
 
     implementation(group: 'org.asciidoctor', name: 'asciidoctorj', version: '2.5.0')
 
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
     annotationProcessor('org.projectlombok:lombok')
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 

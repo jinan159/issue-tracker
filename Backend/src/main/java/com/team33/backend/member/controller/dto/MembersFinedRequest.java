@@ -1,4 +1,4 @@
-package com.team33.backend.member.controller;
+package com.team33.backend.member.controller.dto;
 
 import lombok.Getter;
 

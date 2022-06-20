@@ -5,11 +5,9 @@ import lombok.Getter;
 @Getter
 public class CommentEditRequest {
 
-    private Long id;
     private String content;
 
-    public CommentEditRequest(Long id, String content) {
-        this.id = id;
+    public CommentEditRequest(String content) {
         this.content = content;
     }
 

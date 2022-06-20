@@ -6,6 +6,7 @@ import com.team33.backend.issue.controller.dto.MilestoneCount;
 import com.team33.backend.issue.controller.dto.MilestoneCreateRequest;
 import com.team33.backend.issue.controller.dto.MilestoneCreateResponse;
 import com.team33.backend.issue.controller.dto.MilestoneDeleteResponse;
+import com.team33.backend.issue.controller.dto.MilestoneResponse;
 import com.team33.backend.issue.service.MilestoneService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +24,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class MilestoneController {
 
     private final MilestoneService milestoneService;
+
+    @GetMapping("/{milestoneId}")
+    public MilestoneResponse getMilestones(@PathVariable Long milestoneId) {
+        return new MilestoneResponse(milestoneService.findMilestoneById(milestoneId));
+    }
 
     @PostMapping
     public MilestoneCreateResponse createMilestone(@RequestBody MilestoneCreateRequest request) {

@@ -1,6 +1,6 @@
 package com.team33.backend.group;
 
-import com.team33.backend.common.CommonEntity;
+import com.team33.backend.common.jpa.entity.CommonEntity;
 import com.team33.backend.member.domain.IssueGroupMember;
 import lombok.Getter;
 

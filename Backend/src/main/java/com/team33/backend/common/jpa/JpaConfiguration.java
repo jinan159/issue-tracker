@@ -1,4 +1,4 @@
-package com.team33.backend.common;
+package com.team33.backend.common.jpa;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.context.annotation.Bean;

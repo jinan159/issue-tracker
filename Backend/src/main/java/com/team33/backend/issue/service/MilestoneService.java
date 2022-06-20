@@ -1,5 +1,6 @@
 package com.team33.backend.issue.service;
 
+import com.team33.backend.issue.controller.dto.MilestoneResponse;
 import com.team33.backend.issue.controller.dto.MilestomeEditRequest;
 import com.team33.backend.issue.controller.dto.MilestoneCount;
 import com.team33.backend.issue.controller.dto.MilestoneCreateRequest;
@@ -9,6 +10,8 @@ import com.team33.backend.issue.repository.MilestoneRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +33,7 @@ public class MilestoneService {
         return findMilestone;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public MilestoneCount getIssueMilestoneCount(Long milestoneId) {
         return milestoneQueryRepository.countIssueMilestoneCount(milestoneId);
     }
@@ -40,5 +43,10 @@ public class MilestoneService {
         Milestone findMilestone = milestoneRepository.findById(milestoneId).orElseThrow();
         milestoneRepository.delete(findMilestone);
         return findMilestone;
+    }
+
+    @Transactional(readOnly = true)
+    public Milestone findMilestoneById(Long milestoneId) {
+        return milestoneRepository.findById(milestoneId).orElseThrow();
     }
 }

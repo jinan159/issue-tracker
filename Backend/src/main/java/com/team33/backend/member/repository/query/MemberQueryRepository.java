@@ -1,4 +1,4 @@
-package com.team33.backend.member.controller;
+package com.team33.backend.member.repository.query;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.team33.backend.member.controller.dto.MemberQueryResponse;

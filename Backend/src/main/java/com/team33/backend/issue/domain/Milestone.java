@@ -1,6 +1,6 @@
 package com.team33.backend.issue.domain;
 
-import com.team33.backend.common.CommonEntity;
+import com.team33.backend.common.jpa.entity.CommonEntity;
 import lombok.Getter;
 
 import javax.persistence.Column;
@@ -62,9 +62,7 @@ public class Milestone extends CommonEntity {
             this.title = title;
             return;
         }
-        if (title == null) {
-            throw new IllegalArgumentException("제목을 입력해주세요.");
-        }
+        throw new IllegalArgumentException("제목을 입력해주세요.");
     }
 
     private void editDescription(String description) {
@@ -72,9 +70,7 @@ public class Milestone extends CommonEntity {
             this.description = description;
             return;
         }
-        if (description == null) {
-            throw new IllegalArgumentException("내용을 입력해주세요.");
-        }
+        throw new IllegalArgumentException("내용을 입력해주세요.");
     }
 
     private void editDeadline(LocalDate deadline) {

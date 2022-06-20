@@ -4,6 +4,7 @@ import com.team33.backend.comment.domain.Comment;
 import com.team33.backend.comment.controller.dto.CommentEditRequest;
 import com.team33.backend.comment.controller.dto.CommentWriteRequest;
 import com.team33.backend.comment.repository.CommentRepository;
+import com.team33.backend.emoji.controller.dto.cache.CommentCache;
 import com.team33.backend.issue.domain.Issue;
 import com.team33.backend.issue.repository.IssueRepository;
 import com.team33.backend.member.domain.Member;
@@ -11,6 +12,8 @@ import com.team33.backend.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -33,8 +36,8 @@ public class CommentService {
     }
 
     @Transactional
-    public Comment editComment(CommentEditRequest request) {
-        Comment findComment = commentRepository.findById(request.getId()).orElseThrow();
+    public Comment editComment(Long commentId, CommentEditRequest request) {
+        Comment findComment = commentRepository.findById(commentId).orElseThrow();
         findComment.editComment(request.getContent());
         return findComment;
     }
@@ -44,5 +47,10 @@ public class CommentService {
         Comment findComment = commentRepository.findById(commentId).orElseThrow();
         findComment.deleteComment();
         return findComment;
+    }
+
+    @Transactional
+    public List<CommentCache> findCommentsByIssueId(Long issueId) {
+        return cacheService.findCommentCacheByIssueId(issueId);
     }
 }

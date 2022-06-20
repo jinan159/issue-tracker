@@ -1,4 +1,4 @@
-package com.team33.backend.comment.domain;
+package com.team33.backend.common.jpa.entity;
 
 import lombok.Getter;
 
