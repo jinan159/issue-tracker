@@ -1,10 +1,10 @@
 package com.team33.backend.comment.service;
 
-import com.team33.backend.comment.Comment;
-import com.team33.backend.comment.controller.CommentEditRequest;
+import com.team33.backend.comment.domain.Comment;
+import com.team33.backend.comment.controller.dto.CommentEditRequest;
 import com.team33.backend.comment.controller.dto.CommentWriteRequest;
 import com.team33.backend.issue.domain.Issue;
-import com.team33.backend.member.Member;
+import com.team33.backend.member.domain.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +39,6 @@ public class CommentService {
     public Comment deleteComment(Long commentId) {
         Comment findComment = commentRepository.findById(commentId).orElseThrow();
         findComment.deleteComment();
-        return null;
+        return findComment;
     }
 }

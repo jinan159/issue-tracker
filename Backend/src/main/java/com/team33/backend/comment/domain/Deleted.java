@@ -1,4 +1,4 @@
-package com.team33.backend.comment;
+package com.team33.backend.comment.domain;
 
 import lombok.Getter;
 

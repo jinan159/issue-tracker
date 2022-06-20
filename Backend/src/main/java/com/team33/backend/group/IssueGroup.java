@@ -1,7 +1,7 @@
 package com.team33.backend.group;
 
 import com.team33.backend.common.CommonEntity;
-import com.team33.backend.member.IssueGroupMember;
+import com.team33.backend.member.domain.IssueGroupMember;
 import lombok.Getter;
 
 import javax.persistence.CascadeType;

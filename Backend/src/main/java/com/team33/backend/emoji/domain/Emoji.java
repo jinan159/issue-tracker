@@ -1,8 +1,10 @@
-package com.team33.backend.member;
+package com.team33.backend.emoji.domain;
 
-import com.team33.backend.group.IssueGroup;
+import com.team33.backend.comment.domain.Comment;
+import com.team33.backend.issue.domain.Issue;
 import lombok.Getter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,25 +16,28 @@ import java.util.Objects;
 
 @Entity
 @Getter
-public class IssueGroupMember {
+public class Emoji {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id", nullable = false)
-    private IssueGroup issueGroup;
+    @Column(length = 4)
+    private String emotion;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = false)
-    private Member member;
+    @JoinColumn(name = "issue_id", nullable = false)
+    private Issue issue;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "comment_id")
+    private Comment comment;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof IssueGroupMember)) return false;
-        IssueGroupMember entity = (IssueGroupMember) o;
+        if (!(o instanceof Emoji)) return false;
+        Emoji entity = (Emoji) o;
         return Objects.equals(id, entity.id);
     }
 

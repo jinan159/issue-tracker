@@ -4,13 +4,16 @@ import com.team33.backend.comment.domain.Comment;
 import lombok.Getter;
 
 @Getter
-public class CommentWriteResponse {
+public class CommentEditResponse {
 
-    private final Long id;
-    private final String content;
+    private Long id;
+    private String content;
 
-    public CommentWriteResponse(Comment comment) {
+    public CommentEditResponse(Comment comment) {
         this.id = comment.getId();
         this.content = comment.getContent();
+    }
+
+    public CommentEditResponse() {
     }
 }

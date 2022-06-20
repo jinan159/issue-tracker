@@ -1,6 +1,6 @@
-package com.team33.backend.member;
+package com.team33.backend.member.domain;
 
-import com.team33.backend.comment.Deleted;
+import com.team33.backend.comment.domain.Deleted;
 import com.team33.backend.issue.domain.Issue;
 import lombok.Getter;
 

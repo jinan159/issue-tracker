@@ -1,6 +1,6 @@
 package com.team33.backend.issue.domain;
 
-import com.team33.backend.member.Member;
+import com.team33.backend.member.domain.Member;
 import lombok.Getter;
 
 import javax.persistence.Entity;

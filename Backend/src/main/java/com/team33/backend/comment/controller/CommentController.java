@@ -1,5 +1,8 @@
 package com.team33.backend.comment.controller;
 
+import com.team33.backend.comment.controller.dto.CommentDeleteResponse;
+import com.team33.backend.comment.controller.dto.CommentEditResponse;
+import com.team33.backend.comment.controller.dto.CommentEditRequest;
 import com.team33.backend.comment.controller.dto.CommentWriteRequest;
 import com.team33.backend.comment.controller.dto.CommentWriteResponse;
 import com.team33.backend.comment.service.CommentService;
@@ -28,8 +31,8 @@ public class CommentController {
     }
 
     @PutMapping
-    public CommentEdieResponse edieComment(@RequestBody CommentEditRequest request){
-        return new CommentEdieResponse(commentService.editComment(request));
+    public CommentEditResponse edieComment(@RequestBody CommentEditRequest request){
+        return new CommentEditResponse(commentService.editComment(request));
     }
 
     @DeleteMapping("{commentId}")

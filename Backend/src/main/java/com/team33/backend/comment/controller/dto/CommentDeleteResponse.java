@@ -1,6 +1,6 @@
-package com.team33.backend.comment.controller;
+package com.team33.backend.comment.controller.dto;
 
-import com.team33.backend.comment.Comment;
+import com.team33.backend.comment.domain.Comment;
 import lombok.Getter;
 
 @Getter
