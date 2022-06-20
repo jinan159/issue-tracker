@@ -39,6 +39,13 @@ public class Comment extends CommonEntity {
     @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
     private List<Emoji> emojis = new ArrayList<>();
 
+    public Comment(String content, List<Image> images, Member member, Issue issue) {
+        this.content = content;
+        this.images = images;
+        this.member = member;
+        this.issue = issue;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
