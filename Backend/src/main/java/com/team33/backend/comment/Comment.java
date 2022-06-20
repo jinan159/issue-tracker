@@ -7,7 +7,17 @@ import com.team33.backend.issue.domain.Issue;
 import com.team33.backend.member.Member;
 import lombok.Getter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +34,9 @@ public class Comment extends CommonEntity {
     @Lob
     @NotBlank
     private String content;
+
+    @Embedded
+    private Deleted deleted;
 
     @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
     private List<Image> images = new ArrayList<>();
@@ -46,6 +59,9 @@ public class Comment extends CommonEntity {
         this.issue = issue;
     }
 
+    protected Comment() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -57,5 +73,13 @@ public class Comment extends CommonEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public void editComment(String content) {
+        this.content = content;
+    }
+
+    public void deleteComment() {
+        deleted.isTrue();
     }
 }

@@ -1,6 +1,7 @@
 package com.team33.backend.comment.service;
 
 import com.team33.backend.comment.Comment;
+import com.team33.backend.comment.controller.CommentEditRequest;
 import com.team33.backend.comment.controller.dto.CommentWriteRequest;
 import com.team33.backend.issue.domain.Issue;
 import com.team33.backend.member.Member;
@@ -25,5 +26,19 @@ public class CommentService {
         // 이미지는 일단 없다고 가정
         Comment newComment = new Comment(request.getContent(), null, findMember, findIssue);
         return commentRepository.save(newComment);
+    }
+
+    @Transactional
+    public Comment editComment(CommentEditRequest request) {
+        Comment findComment = commentRepository.findById(request.getId()).orElseThrow();
+        findComment.editComment(request.getContent());
+        return findComment;
+    }
+
+    @Transactional
+    public Comment deleteComment(Long commentId) {
+        Comment findComment = commentRepository.findById(commentId).orElseThrow();
+        findComment.deleteComment();
+        return null;
     }
 }

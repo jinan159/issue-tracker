@@ -1,9 +1,11 @@
 package com.team33.backend.member;
 
+import com.team33.backend.comment.Deleted;
 import com.team33.backend.issue.domain.Issue;
 import lombok.Getter;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,6 +29,9 @@ public class Member {
 
     @Column(length = 2048)
     private String profileImageUrl;
+
+    @Embedded
+    private Deleted deleted;
 
     @OneToMany(mappedBy = "author")
     private List<Issue> issues = new ArrayList<>();

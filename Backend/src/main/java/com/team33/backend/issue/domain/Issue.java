@@ -1,6 +1,7 @@
 package com.team33.backend.issue.domain;
 
 import com.team33.backend.comment.Comment;
+import com.team33.backend.comment.Deleted;
 import com.team33.backend.common.CommonEntity;
 import com.team33.backend.emoji.Emoji;
 import com.team33.backend.group.IssueGroup;
@@ -9,6 +10,7 @@ import lombok.Getter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -35,6 +37,9 @@ public class Issue extends CommonEntity {
     @Column(length = 60)
     @NotBlank
     private String title;
+
+    @Embedded
+    private Deleted deleted;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false)
