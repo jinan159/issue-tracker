@@ -19,7 +19,7 @@ const items = [
 
 export default function Main() {
   return (
-    <>
+    <S.Container>
       <S.SpaceBetweenContainer>
         <S.Title>Issue Tracker</S.Title>
         <S.UserInfo src="https://via.placeholder.com/20" alt="sample image" />
@@ -56,6 +56,6 @@ export default function Main() {
         />
       </S.SpaceBetweenContainer>
       <IssueTable />
-    </>
+    </S.Container>
   );
 }

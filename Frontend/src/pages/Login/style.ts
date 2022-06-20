@@ -16,7 +16,7 @@ export const flexColumn = css`
 `;
 
 export const LoginContainer = styled.div`
-  ${flexColumn}
+  ${flexColumn};
   width: 200px;
   height: 36px;
   margin: 0 auto;

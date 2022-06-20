@@ -19,9 +19,20 @@ const mixins = {
   `,
 };
 
+const width = {
+  base: {
+    'min-width': '1280px',
+  },
+};
+
 const theme = {
   color,
   mixins,
+  width,
 };
+
+type ThemeType = typeof theme;
+
+export type { ThemeType };
 
 export default theme;
