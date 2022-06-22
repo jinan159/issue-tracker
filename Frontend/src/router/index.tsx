@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Issue from '../pages/Issue';
-import Loading from '../pages/Loading';
-import Login from '../pages/Login';
-import Main from '../pages/Main';
+import Issue from '@/pages/Issue';
+import Loading from '@/pages/Loading';
+import Login from '@/pages/Login';
+import Main from '@/pages/Main';
 
 function Router() {
   return (
