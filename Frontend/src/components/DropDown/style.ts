@@ -5,7 +5,7 @@ export const Container = styled.div<{
   height: string;
 }>`
   position: relative;
-  background-color: ${({ theme }) => theme.color.grey3};
+  background-color: ${({ theme }) => theme.colors.greyScale.inputBackground};
   width: ${({ width }) => width};
   height: ${({ height }) => height};
 `;
@@ -18,7 +18,8 @@ export const Content = styled.div<{
   position: absolute;
   width: ${({ width }) => width};
   background: transparent;
-  box-shadow: 2px 2px 2px 2px ${({ theme }) => theme.color.grey3};
+  box-shadow: 2px 2px 2px 2px
+    ${({ theme }) => theme.colors.greyScale.inputBackground};
   right: ${({ isStartFromRight }) => isStartFromRight && '0'};
 `;
 
@@ -34,7 +35,7 @@ export const DropDown = styled.input<{
     + .${({ labelName }) => labelName}
     + .${({ constentsName }) => constentsName} {
     display: block;
-    border-top: 1px solid ${({ theme }) => theme.color.grey2};
+    border-top: 1px solid ${({ theme }) => theme.colors.greyScale.line};
   }
 `;
 

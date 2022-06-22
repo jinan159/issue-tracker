@@ -14,7 +14,7 @@ export const Title = styled.h1`
   font-weight: 500;
   font-size: 32px;
   line-height: 40px;
-  color: ${({ theme }) => theme.color.black};
+  color: ${({ theme }) => theme.colors.greyScale.titleActive};
 `;
 
 export const LogoLink = styled(Link)`

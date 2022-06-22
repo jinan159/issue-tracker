@@ -6,7 +6,7 @@ const ZeroList = styled.div`
   font-weight: 700;
   font-size: 28px;
   line-height: 32px;
-  color: ${({ theme }) => theme.color.black};
+  color: ${({ theme }) => theme.colors.greyScale.titleActive};
   ${({ theme }) => theme.mixins.flexBox('row', 'center', 'center')};
 `;
 

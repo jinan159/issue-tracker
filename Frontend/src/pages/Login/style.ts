@@ -8,7 +8,7 @@ export const Title = styled.h1`
   font-weight: 400;
   font-size: 56px;
   line-height: 72px;
-  color: ${({ theme }) => theme.color.black};
+  color: ${({ theme }) => theme.colors.greyScale.titleActive};
   margin-bottom: 61px;
 `;
 
@@ -19,18 +19,18 @@ const ButtonSize = `
 
 export const OauthButton = styled(Button)`
   ${ButtonSize};
-  background: ${({ theme }) => theme.color.black};
+  background: ${({ theme }) => theme.colors.greyScale.titleActive};
   border-radius: 20px;
   font-weight: 700;
   font-size: 18px;
   line-height: 32px;
-  color: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.colors.greyScale.offWhite};
 `;
 
 export const Content = styled.p`
   font-weight: 700;
   font-size: 16px;
-  color: ${({ theme }) => theme.color.greyPlaceholder};
+  color: ${({ theme }) => theme.colors.greyScale.placeholder};
   margin: 24px 0;
 `;
 
@@ -45,7 +45,7 @@ export const LoginContainer = styled.div`
 export const LoginInput = styled.input`
   ${ButtonSize};
   padding: 0 24px;
-  background: ${({ theme }) => theme.color.grey3};
+  background: ${({ theme }) => theme.colors.inputBackground};
   border-radius: 16px;
   &:not(:last-child) {
     margin-bottom: 16px;
@@ -53,23 +53,23 @@ export const LoginInput = styled.input`
   font-weight: 400;
   font-size: 16px;
   line-height: 28px;
-  color: ${({ theme }) => theme.color.greyPlaceholder};
+  color: ${({ theme }) => theme.colors.greyScale.placeholder};
 `;
 
 export const LoginButton = styled(Button)`
   ${ButtonSize};
   padding: 0 24px;
-  background: ${({ theme }) => theme.color.blue1};
+  background: ${({ theme }) => theme.colors.blueScale.blue};
   border-radius: 20px;
   font-weight: 700;
   font-size: 18px;
   line-height: 32px;
-  color: ${({ theme }) => theme.color.white};
+  color: ${({ theme }) => theme.colors.greyScale.offWhite};
   :disabled {
-    color: ${({ theme }) => theme.color.white};
-    background: ${({ theme }) => theme.color.blue2};
+    color: ${({ theme }) => theme.colors.greyScale.offWhite};
+    background: ${({ theme }) => theme.colors.blueScale.lightBlue};
     :hover {
-      color: ${({ theme }) => theme.color.white};
+      color: ${({ theme }) => theme.colors.greyScale.offWhite};
     }
   }
 `;
@@ -84,5 +84,5 @@ export const SignUpButton = styled(Button)`
   font-weight: 700;
   font-size: 12px;
   line-height: 20px;
-  color: ${({ theme }) => theme.color.greyBody};
+  color: ${({ theme }) => theme.colors.greyScale.body};
 `;
