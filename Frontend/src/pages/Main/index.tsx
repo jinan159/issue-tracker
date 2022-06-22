@@ -7,7 +7,7 @@ import * as S from './style';
 const dropDownWidth = '128px';
 const dropDownHeight = '40px';
 const dropBoxWidth = '200px';
-const dropDownTitle = '필터';
+const dropDownTitle = ['필터', '상태수정'];
 const itemsTitle = '이슈필터';
 
 const items = [
@@ -29,7 +29,7 @@ export default function Main() {
               dropDownWidth={dropDownWidth}
               dropDownHeight={dropDownHeight}
               dropBoxWidth={dropBoxWidth}
-              dropDownTitle={dropDownTitle}
+              dropDownTitle={dropDownTitle[0]}
               itemsTitle={itemsTitle}
               items={items}
             />
@@ -48,7 +48,7 @@ export default function Main() {
             dropDownWidth="100px"
             dropDownHeight="50px"
             dropBoxWidth={dropBoxWidth}
-            dropDownTitle="상태수정"
+            dropDownTitle={dropDownTitle[0]}
             itemsTitle="상태변경"
             items={['선택한 이슈 열기', '선택한 이슈 닫기']}
             isStartFromRight
