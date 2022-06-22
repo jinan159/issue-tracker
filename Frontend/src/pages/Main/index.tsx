@@ -1,6 +1,7 @@
-import Button from '../../components/Button';
+import Button from '../../components/common/Button';
 import DropDown from '../../components/DropDown';
-import IssueTable from '../../IssueTable';
+import Header from '../../components/Header';
+import IssueTable from '../../components/IssueTable';
 import * as S from './style';
 
 const dropDownWidth = '128px';
@@ -19,43 +20,42 @@ const items = [
 
 export default function Main() {
   return (
-    <S.Container>
-      <S.SpaceBetweenContainer>
-        <S.Title>Issue Tracker</S.Title>
-        <S.UserInfo src="https://via.placeholder.com/20" alt="sample image" />
-      </S.SpaceBetweenContainer>
-      <S.SpaceBetweenContainer>
-        <S.FlexContainer>
+    <>
+      <Header />
+      <S.Container>
+        <S.SpaceBetweenContainer>
+          <S.FlexContainer>
+            <DropDown
+              dropDownWidth={dropDownWidth}
+              dropDownHeight={dropDownHeight}
+              dropBoxWidth={dropBoxWidth}
+              dropDownTitle={dropDownTitle}
+              itemsTitle={itemsTitle}
+              items={items}
+            />
+            <S.SearchBar
+              type="text"
+              placeholder="is:issue is:open"
+              height={dropDownHeight}
+            />
+          </S.FlexContainer>
+          <div>
+            <Button type="button" content="레이블" />
+            <Button type="button" content="마일스톤" />
+            <Button type="button" content="이슈작성" />
+          </div>
           <DropDown
-            dropDownWidth={dropDownWidth}
-            dropDownHeight={dropDownHeight}
+            dropDownWidth="100px"
+            dropDownHeight="50px"
             dropBoxWidth={dropBoxWidth}
-            dropDownTitle={dropDownTitle}
-            itemsTitle={itemsTitle}
-            items={items}
+            dropDownTitle="상태수정"
+            itemsTitle="상태변경"
+            items={['선택한 이슈 열기', '선택한 이슈 닫기']}
+            isStartFromRight
           />
-          <S.SearchBar
-            type="text"
-            placeholder="is:issue is:open"
-            height={dropDownHeight}
-          />
-        </S.FlexContainer>
-        <div>
-          <Button icon="레이블" />
-          <Button icon="마일스톤" />
-          <Button icon="이슈작성" />
-        </div>
-        <DropDown
-          dropDownWidth="100px"
-          dropDownHeight="50px"
-          dropBoxWidth={dropBoxWidth}
-          dropDownTitle="상태수정"
-          itemsTitle="상태변경"
-          items={['선택한 이슈 열기', '선택한 이슈 닫기']}
-          isStartFromRight
-        />
-      </S.SpaceBetweenContainer>
-      <IssueTable />
-    </S.Container>
+        </S.SpaceBetweenContainer>
+        <IssueTable />
+      </S.Container>
+    </>
   );
 }

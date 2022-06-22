@@ -43,7 +43,7 @@ module.exports = {
         use: 'ts-loader',
       },
       {
-        test: /\.(png|jpg|gif)$/i,
+        test: /\.(png|jpg|gif|jpeg)$/i,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]?[hash]',
