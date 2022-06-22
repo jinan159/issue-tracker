@@ -1,13 +1,34 @@
-const color = {
-  black: '#14142B',
-  white: '#FEFEFE',
-  grey1: '#6E7191',
-  grey2: '#D9DBE9',
-  grey3: '#EFF0F6',
-  grey4: '#F7F7FC',
-  blue1: '#007AFF',
-  blue2: '#C7EBFF',
-  red: '#FF3B30',
+const colors = {
+  greyScale: {
+    titleActive: '#14142B',
+    body: '#4E4B66',
+    label: '#6E7191',
+    placeholder: '#A0A3BD',
+    line: '#D9DBE9',
+    inputBackground: '#EFF0F6',
+    background: '#F7F7FC',
+    offWhite: '#FEFEFE',
+  },
+  blueScale: {
+    blue: '#007AFF',
+    lightBlue: '#C7EBFF',
+    darkBlue: '#004DE3',
+  },
+  purpleScale: {
+    purple: '#0025E7',
+    lightPurple: '#CCD4FF',
+    darkPurple: '#020070',
+  },
+  redScale: {
+    red: '#FF3B30',
+    lightRed: '#FFD1CF',
+    darkRed: '#C60B00',
+  },
+  greenScale: {
+    green: '#34C759',
+    lightGreen: '#DDFFE6',
+    darkGreen: '#00A028',
+  },
 };
 
 const mixins = {
@@ -19,9 +40,20 @@ const mixins = {
   `,
 };
 
-const theme = {
-  color,
-  mixins,
+const width = {
+  base: {
+    'min-width': '1280px',
+  },
 };
+
+const theme = {
+  colors,
+  mixins,
+  width,
+};
+
+type ThemeType = typeof theme;
+
+export type { ThemeType };
 
 export default theme;

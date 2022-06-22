@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable import/no-extraneous-dependencies */
-import { v4 as uuidv4 } from 'uuid';
+import { useId } from 'react';
 
 import DropBox from '../DropBox';
 import * as S from './style';
@@ -15,8 +15,6 @@ interface DropDownProps {
   isStartFromRight?: boolean;
 }
 
-const id = uuidv4();
-
 export default function DropDown({
   dropDownWidth,
   dropDownHeight,
@@ -26,22 +24,24 @@ export default function DropDown({
   itemsTitle,
   items,
 }: DropDownProps) {
+  const id = useId();
+
   return (
     <S.Container width={dropDownWidth} height={dropDownHeight}>
       <S.DropDown
         id={`dropdown-${dropDownTitle}-${id}`}
         type="checkbox"
-        constentsName={`${dropDownTitle}-${id}`}
-        labelName={`dropdown-label-${dropDownTitle}-${id}`}
+        constentsName={`${dropDownTitle}`}
+        labelName={`dropdown-label-${dropDownTitle}`}
       />
       <S.DropdownLabel
-        className={`dropdown-label-${dropDownTitle}-${id}`}
+        className={`dropdown-label-${dropDownTitle}`}
         htmlFor={`dropdown-${dropDownTitle}-${id}`}
       >
         <S.DropDownTitle>{dropDownTitle}</S.DropDownTitle>
       </S.DropdownLabel>
       <S.Content
-        className={`${dropDownTitle}-${id}`}
+        className={`${dropDownTitle}`}
         width={dropBoxWidth}
         isStartFromRight={isStartFromRight}
       >

@@ -1,10 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
-const GlobalStyle = createGlobalStyle`
+import { ThemeType } from './theme';
+
+const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
   ${reset}
+  
   body {
-    padding: 0 100px;
   }
   
   input {
@@ -16,6 +18,12 @@ const GlobalStyle = createGlobalStyle`
   button {
     border: none;
     cursor: pointer;
+  }
+  
+  .app {
+    width: 100vw;
+    height: 100vh;
+    ${({ theme: { width } }) => width.base};
   }
 `;
 

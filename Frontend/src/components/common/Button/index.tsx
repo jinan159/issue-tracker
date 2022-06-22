@@ -6,6 +6,7 @@ type ButtonProps = {
   disabled?: boolean;
   className?: string;
   handleClick?: () => void;
+  children?: JSX.Element | JSX.Element[];
 };
 
 function Button({
@@ -14,6 +15,7 @@ function Button({
   content,
   disabled = false,
   handleClick,
+  children,
 }: ButtonProps) {
   return (
     <S.Button
@@ -23,6 +25,7 @@ function Button({
       onClick={handleClick}
     >
       {content}
+      {children}
     </S.Button>
   );
 }

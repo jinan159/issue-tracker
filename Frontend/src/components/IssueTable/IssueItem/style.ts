@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Container = styled.div`
   width: 1280px;
   height: 100px;
-  background: ${({ theme }) => theme.color.white};
+  background: ${({ theme }) => theme.colors.greyScale.offWhite};
   padding: 20px 32px 0 32px;
   box-sizing: border-box;
   ${({ theme }) => theme.mixins.flexBox('row', 'start', 'space-between')};
@@ -11,7 +11,6 @@ const Container = styled.div`
 
 const Wrapper1 = styled.div`
   ${({ theme }) => theme.mixins.flexBox('row', 'start', 'start')};
-
   input {
     margin-top: 8px;
     margin-right: 32px;
@@ -31,7 +30,7 @@ const Title = styled.h1`
   font-weight: 700;
   font-size: 18px;
   line-height: 32px;
-  color: ${({ theme }) => theme.color.black};
+  color: ${({ theme }) => theme.colors.greyScale.titleActive};
   margin-right: 14px;
 `;
 
@@ -50,7 +49,7 @@ const Content = styled.p`
   font-weight: 400;
   font-size: 16px;
   line-height: 28px;
-  color: ${({ theme }) => theme.color.grey1};
+  color: ${({ theme }) => theme.colors.greyScale.label};
   &:not(:last-child) {
     margin-right: 20px;
   }
