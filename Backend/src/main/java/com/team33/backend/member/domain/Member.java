@@ -1,8 +1,11 @@
-package com.team33.backend.member;
+package com.team33.backend.member.domain;
 
+import com.team33.backend.common.jpa.entity.Deleted;
 import com.team33.backend.issue.domain.Issue;
+import lombok.Getter;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Getter
 public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +27,14 @@ public class Member {
     @NotBlank
     private String name;
 
+    @NotBlank
+    private String githubId;
+
     @Column(length = 2048)
     private String profileImageUrl;
+
+    @Embedded
+    private Deleted deleted;
 
     @OneToMany(mappedBy = "author")
     private List<Issue> issues = new ArrayList<>();

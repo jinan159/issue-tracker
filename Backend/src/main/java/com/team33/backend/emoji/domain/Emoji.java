@@ -1,7 +1,8 @@
-package com.team33.backend.emoji;
+package com.team33.backend.emoji.domain;
 
-import com.team33.backend.comment.Comment;
+import com.team33.backend.comment.domain.Comment;
 import com.team33.backend.issue.domain.Issue;
+import lombok.Getter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 @Entity
+@Getter
 public class Emoji {
 
     @Id

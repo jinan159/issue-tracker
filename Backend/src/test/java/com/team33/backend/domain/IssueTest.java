@@ -1,12 +1,15 @@
 package com.team33.backend.domain;
 
 import com.team33.backend.issue.domain.Issue;
+import com.team33.backend.issue.repository.IssueRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -17,10 +20,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Profile(value = "test")
 class IssueTest {
 
     @Autowired
     private EntityManager entityManager;
+
     @Autowired
     private IssueRepository issueRepository;
 

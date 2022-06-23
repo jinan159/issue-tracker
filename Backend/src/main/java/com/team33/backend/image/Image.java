@@ -1,13 +1,15 @@
 package com.team33.backend.image;
 
-import com.team33.backend.comment.Comment;
+import com.team33.backend.comment.domain.Comment;
 import com.team33.backend.issue.domain.Issue;
+import lombok.Getter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Entity
+@Getter
 public class Image {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

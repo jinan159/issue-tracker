@@ -1,4 +1,4 @@
-package com.team33.backend.common;
+package com.team33.backend.common.jpa.entity;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

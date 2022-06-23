@@ -1,5 +1,7 @@
 package com.team33.backend.issue.domain;
 
+import lombok.Getter;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -10,6 +12,7 @@ import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 @Entity
+@Getter
 public class IssueLabel {
 
     @Id

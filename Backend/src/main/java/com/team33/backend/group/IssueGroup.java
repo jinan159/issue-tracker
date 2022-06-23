@@ -1,7 +1,8 @@
 package com.team33.backend.group;
 
-import com.team33.backend.common.CommonEntity;
-import com.team33.backend.member.IssueGroupMember;
+import com.team33.backend.common.jpa.entity.CommonEntity;
+import com.team33.backend.member.domain.IssueGroupMember;
+import lombok.Getter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Getter
 public class IssueGroup extends CommonEntity {
 
     @Id

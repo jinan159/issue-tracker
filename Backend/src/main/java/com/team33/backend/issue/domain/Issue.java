@@ -1,12 +1,16 @@
 package com.team33.backend.issue.domain;
 
-import com.team33.backend.comment.Comment;
-import com.team33.backend.common.CommonEntity;
+import com.team33.backend.comment.domain.Comment;
+import com.team33.backend.common.jpa.entity.Deleted;
+import com.team33.backend.common.jpa.entity.CommonEntity;
+import com.team33.backend.emoji.domain.Emoji;
 import com.team33.backend.group.IssueGroup;
-import com.team33.backend.member.Member;
+import com.team33.backend.member.domain.Member;
+import lombok.Getter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -23,6 +27,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Getter
 public class Issue extends CommonEntity {
 
     @Id
@@ -32,6 +37,9 @@ public class Issue extends CommonEntity {
     @Column(length = 60)
     @NotBlank
     private String title;
+
+    @Embedded
+    private Deleted deleted;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id", nullable = false)
@@ -54,6 +62,9 @@ public class Issue extends CommonEntity {
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "issue", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Emoji> emojis = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {

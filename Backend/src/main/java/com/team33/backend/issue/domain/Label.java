@@ -1,5 +1,7 @@
 package com.team33.backend.issue.domain;
 
+import lombok.Getter;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Entity
+@Getter
 public class Label {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,18 +1,31 @@
-package com.team33.backend.comment;
+package com.team33.backend.comment.domain;
 
-import com.team33.backend.common.CommonEntity;
-import com.team33.backend.emoji.Emoji;
+import com.team33.backend.common.jpa.entity.CommonEntity;
+import com.team33.backend.common.jpa.entity.Deleted;
+import com.team33.backend.emoji.domain.Emoji;
 import com.team33.backend.image.Image;
 import com.team33.backend.issue.domain.Issue;
-import com.team33.backend.member.Member;
+import com.team33.backend.member.domain.Member;
+import lombok.Getter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Getter
 public class Comment extends CommonEntity {
 
     @Id
@@ -22,6 +35,9 @@ public class Comment extends CommonEntity {
     @Lob
     @NotBlank
     private String content;
+
+    @Embedded
+    private Deleted deleted;
 
     @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
     private List<Image> images = new ArrayList<>();
@@ -37,6 +53,16 @@ public class Comment extends CommonEntity {
     @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
     private List<Emoji> emojis = new ArrayList<>();
 
+    public Comment(String content, List<Image> images, Member member, Issue issue) {
+        this.content = content;
+        this.images = images;
+        this.member = member;
+        this.issue = issue;
+    }
+
+    protected Comment() {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,5 +74,13 @@ public class Comment extends CommonEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public void editComment(String content) {
+        this.content = content;
+    }
+
+    public void deleteComment() {
+        deleted.isTrue();
     }
 }
