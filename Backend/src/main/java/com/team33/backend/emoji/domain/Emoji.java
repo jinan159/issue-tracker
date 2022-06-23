@@ -33,6 +33,10 @@ public class Emoji {
     @JoinColumn(name = "comment_id")
     private Comment comment;
 
+    public Emoji(String emotion) {
+        this.emotion = emotion;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -44,5 +48,11 @@ public class Emoji {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public void registComment(Comment comment) {
+        if (comment != null) {
+            this.comment = comment;
+        }
     }
 }

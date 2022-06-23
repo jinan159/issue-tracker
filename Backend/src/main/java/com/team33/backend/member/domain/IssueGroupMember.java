@@ -1,6 +1,6 @@
 package com.team33.backend.member.domain;
 
-import com.team33.backend.group.IssueGroup;
+import com.team33.backend.issuegroup.domain.IssueGroup;
 import lombok.Getter;
 
 import javax.persistence.Entity;
@@ -21,7 +21,7 @@ public class IssueGroupMember {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "group_id", nullable = false)
+    @JoinColumn(name = "issue_group_id", nullable = false)
     private IssueGroup issueGroup;
 
     @ManyToOne(fetch = FetchType.LAZY)

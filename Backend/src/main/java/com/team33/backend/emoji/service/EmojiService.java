@@ -1,6 +1,7 @@
 package com.team33.backend.emoji.service;
 
-import com.team33.backend.emoji.controller.dto.EmotionResponse;
+import com.team33.backend.emoji.domain.Emotion;
+import com.team33.backend.emoji.repository.EmotionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -14,13 +15,10 @@ public class EmojiService {
 
     private final EmotionRepository emotionRepository;
 
-    @Transactional
-    @Cacheable(value = "getEmotions", key = "#emotion", condition = "#emotion!=null")
-    public List<Emotion> getEmotions(){
+    @Transactional(readOnly = true)
+    @Cacheable(value = "findEmotions", key = "#emotion", condition = "#emotion!=null")
+    public List<Emotion> findEmotions(){
         return emotionRepository.findAll();
     }
 
-    public Emotion getEmotionById(Long id) {
-        return emotionRepository.findById(id).orElseThrow();
-    }
 }
