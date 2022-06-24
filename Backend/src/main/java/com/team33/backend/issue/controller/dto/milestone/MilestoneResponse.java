@@ -1,12 +1,14 @@
 package com.team33.backend.issue.controller.dto.milestone;
 
 import com.team33.backend.issue.domain.Milestone;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Getter
+@AllArgsConstructor
 public class MilestoneResponse {
 
     private final Long id;
