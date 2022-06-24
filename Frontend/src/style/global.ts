@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle<{ theme: ThemeType }>`
   button {
     border: none;
     cursor: pointer;
+    background: none;
   }
   
   .app {
