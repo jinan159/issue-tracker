@@ -23,3 +23,12 @@ export const UserInfo = styled.img``;
 export const SearchBar = styled.input<{ height: string }>`
   height: ${({ height }) => height};
 `;
+
+export const TapContainer = styled.div<{
+  isMouseOvered: boolean;
+  isActive: boolean;
+}>`
+  ${({ theme }) => theme.mixins.flexBox('row', 'start', 'start')};
+  border-radius: 0px 11px 11px 0px;
+  background-color: 'red';
+`;
