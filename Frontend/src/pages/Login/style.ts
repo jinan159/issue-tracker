@@ -45,7 +45,7 @@ export const LoginContainer = styled.div`
 export const LoginInput = styled.input`
   ${ButtonSize};
   padding: 0 24px;
-  background: ${({ theme }) => theme.colors.inputBackground};
+  background: ${({ theme }) => theme.colors.greyScale.inputBackground};
   border-radius: 16px;
   &:not(:last-child) {
     margin-bottom: 16px;

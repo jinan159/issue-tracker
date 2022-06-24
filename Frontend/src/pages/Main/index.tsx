@@ -1,4 +1,6 @@
-import Button from '../../components/common/Button';
+import Tap from '@/components/Tap';
+import useMouse from '@/hooks/useMouse';
+
 import DropDown from '../../components/DropDown';
 import Header from '../../components/Header';
 import IssueTable from '../../components/IssueTable';
@@ -19,6 +21,15 @@ const items = [
 ];
 
 export default function Main() {
+  const [
+    isMouseOvered,
+    isActive,
+    handleMouseOver,
+    handleMouseOut,
+    handleMouseDown,
+    handleMouseUp,
+  ] = useMouse(false);
+
   return (
     <>
       <Header />
@@ -39,11 +50,21 @@ export default function Main() {
               height={dropDownHeight}
             />
           </S.FlexContainer>
-          <div>
-            <Button type="button" content="레이블" />
-            <Button type="button" content="마일스톤" />
-            <Button type="button" content="이슈작성" />
-          </div>
+          <S.TapContainer
+            onMouseOver={handleMouseOver}
+            onMouseOut={handleMouseOut}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            isMouseOvered={isMouseOvered}
+            isActive={isActive}
+          >
+            <Tap iconType="label" title="레이블" borderDirection="left" />
+            <Tap
+              iconType="mileStone"
+              title="마일스톤"
+              borderDirection="right"
+            />
+          </S.TapContainer>
           <DropDown
             dropDownWidth="100px"
             dropDownHeight="50px"

@@ -8,6 +8,7 @@ export const Container = styled.div<{
   background-color: ${({ theme }) => theme.colors.greyScale.inputBackground};
   width: ${({ width }) => width};
   height: ${({ height }) => height};
+  border-radius: 11px 0px 0px 11px;
 `;
 
 export const Content = styled.div<{
@@ -39,7 +40,22 @@ export const DropDown = styled.input<{
   }
 `;
 
-export const DropDownTitle = styled.div`
+export const DropDownTitle = styled.div<{
+  isMouseOvered: boolean;
+}>`
   width: 100%;
   height: 100%;
+  color: ${({ theme, isMouseOvered }) =>
+    isMouseOvered ? theme.colors.greyScale.body : theme.colors.greyScale.label};
+`;
+
+export const Filter = styled.div`
+  width: 100%;
+  height: 100%;
+  ${({ theme }) => theme.mixins.flexBox('row', 'center', 'space-around')};
+`;
+
+export const IconContainer = styled.div`
+  ${({ theme }) => theme.mixins.flexBox('row', 'center', 'center')};
+  padding-top: 10px;
 `;
