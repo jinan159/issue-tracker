@@ -7,19 +7,15 @@ import lombok.Setter;
 import java.time.LocalDate;
 
 @Getter
-@Setter
 public class MilestoneResponse {
 
-    private Long id;
-    private String title;
-    private LocalDate deadline;
+    private final Long id;
+    private final String title;
+    private final LocalDate deadline;
 
     public MilestoneResponse(Milestone milestone) {
         this.id = milestone.getId();
         this.title = milestone.getTitle();
         this.deadline = milestone.getDeadline();
-    }
-
-    protected MilestoneResponse() {
     }
 }

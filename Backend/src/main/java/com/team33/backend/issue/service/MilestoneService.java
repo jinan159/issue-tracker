@@ -1,6 +1,6 @@
 package com.team33.backend.issue.service;
 
-import com.team33.backend.issue.controller.dto.milestone.MilestomeEditRequest;
+import com.team33.backend.issue.controller.dto.milestone.MilestoneEditRequest;
 import com.team33.backend.issue.controller.dto.milestone.MilestoneCreateRequest;
 import com.team33.backend.issue.controller.dto.milestone.MilestoneResponse;
 import com.team33.backend.issue.domain.Milestone;
@@ -26,7 +26,7 @@ public class MilestoneService {
     }
 
     @Transactional
-    public Milestone editMilestone(Long milestoneId, MilestomeEditRequest request) {
+    public Milestone editMilestone(Long milestoneId, MilestoneEditRequest request) {
         Milestone findMilestone = milestoneRepository.findById(milestoneId).orElseThrow();
         findMilestone.editMilestone(request.getTitle(), request.getDescription(), request.getLocalDate());
         return findMilestone;
@@ -45,7 +45,7 @@ public class MilestoneService {
     }
 
     @Transactional(readOnly = true)
-    public List<MilestoneResponse> findMilestoneByIssueId(Long issuegroupId) {
-        return milestoneQueryRepository.findMilestoneByIssuegroupId(issuegroupId);
+    public List<MilestoneResponse> findMilestoneByIssueId(Long issueGroupId) {
+        return milestoneQueryRepository.findMilestoneByIssuegroupId(issueGroupId);
     }
 }

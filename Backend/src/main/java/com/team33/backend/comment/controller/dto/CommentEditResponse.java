@@ -6,14 +6,11 @@ import lombok.Getter;
 @Getter
 public class CommentEditResponse {
 
-    private Long id;
-    private String content;
+    private final Long id;
+    private final String content;
 
     public CommentEditResponse(Comment comment) {
         this.id = comment.getId();
         this.content = comment.getContent();
-    }
-
-    public CommentEditResponse() {
     }
 }

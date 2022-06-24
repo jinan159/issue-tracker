@@ -25,7 +25,7 @@ public class CommentService {
     private final CacheService cacheService;
 
     @Transactional
-    public Comment writeComment(Long issuegroupId, Long issueId, String githubId, CommentWriteRequest request) {
+    public Comment writeComment(Long issueGroupId, Long issueId, String githubId, CommentWriteRequest request) {
         // 임시 예외처리
         Member findMember = memberRepository.findByGithubId(githubId).orElseThrow();
         Issue findIssue = issueRepository.findById(issueId).orElseThrow();

@@ -21,16 +21,5 @@ public class LabelQueryRepository {
 
     public List<Label> getLablesByIssueId(Long issueId) {
         return null;
-//        return queryFactory.selectFrom(issueLabel)
-//                .where(issueLabel.issue.id.eq(issueId));
     }
-
-//    public MilestoneCount countIssueMilestoneCount(Long milestoneId) {
-//        QLabel qLabel = new QLabel("qLabel");
-//        return queryFactory.select(Projections.fields(MilestoneCount.class,
-//                        qLabel.count().as("count")))
-//                .from(qLabel)
-//                .where(qLabel.milestone.id.eq(milestoneId))
-//                .fetchOne();
-//    }
 }

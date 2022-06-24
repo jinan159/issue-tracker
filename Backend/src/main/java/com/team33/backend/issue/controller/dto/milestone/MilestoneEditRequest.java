@@ -1,15 +1,17 @@
-package com.team33.backend.issue.controller.dto.label;
+package com.team33.backend.issue.controller.dto.milestone;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor // for jackson
-public class LabelEditRequest {
+public class MilestoneEditRequest {
 
-    private String name;
+    private String title;
     private String description;
-    private String color;
+    private LocalDate localDate;
 }

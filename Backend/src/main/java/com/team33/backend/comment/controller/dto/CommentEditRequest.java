@@ -1,19 +1,16 @@
 package com.team33.backend.comment.controller.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 
 @Getter
+@AllArgsConstructor
+@NoArgsConstructor // for jackson
 public class CommentEditRequest {
 
     @NotBlank
     private String content;
-
-    public CommentEditRequest(String content) {
-        this.content = content;
-    }
-
-    public CommentEditRequest() {
-    }
 }

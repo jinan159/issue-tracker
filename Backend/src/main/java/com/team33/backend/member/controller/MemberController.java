@@ -17,8 +17,8 @@ public class MemberController {
 
     private final MemberQueryService memberQueryService;
 
-    @GetMapping("/{issuegroupId}/members")
-    public List<MemberQueryResponse> findIssueGroupMembers(@PathVariable Long issuegroupId) {
-        return memberQueryService.findGroupMembers(issuegroupId);
+    @GetMapping("/{issueGroupId}/members")
+    public List<MemberQueryResponse> findIssueGroupMembers(@PathVariable Long issueGroupId) {
+        return memberQueryService.findGroupMembers(issueGroupId);
     }
 }

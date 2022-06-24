@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Set;
 
 @Getter
-@Setter
 public class CommentCache implements Serializable {
 
     private Long id;

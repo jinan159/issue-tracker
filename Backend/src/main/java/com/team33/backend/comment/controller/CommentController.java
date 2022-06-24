@@ -28,27 +28,27 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @PostMapping("/{issuegroupId}/issues/{issueId}/comments")
-    public CommentWriteResponse writeComment(HttpServletRequest servletRequest, @PathVariable Long issuegroupId,
+    @PostMapping("/{issueGroupId}/issues/{issueId}/comments")
+    public CommentWriteResponse writeComment(HttpServletRequest servletRequest, @PathVariable Long issueGroupId,
                                              @PathVariable Long issueId, @Valid @RequestBody CommentWriteRequest request) {
         String githubId = (String) servletRequest.getAttribute("memberId");
-        return new CommentWriteResponse(commentService.writeComment(issuegroupId, issueId, githubId, request));
+        return new CommentWriteResponse(commentService.writeComment(issueGroupId, issueId, githubId, request));
     }
 
-    @PutMapping("/{issuegroupId}/issues/{issueId}/comments/{commentId}")
-    public CommentEditResponse edieComment(@PathVariable Long issuegroupId, @PathVariable Long issueId,
+    @PutMapping("/{issueGroupId}/issues/{issueId}/comments/{commentId}")
+    public CommentEditResponse edieComment(@PathVariable Long issueGroupId, @PathVariable Long issueId,
                                            @PathVariable Long commentId, @Valid @RequestBody CommentEditRequest request) {
         return new CommentEditResponse(commentService.editComment(commentId, request));
     }
 
-    @DeleteMapping("/{issuegroupId}/issues/{issueId}/comments/{commentId}")
-    public CommentDeleteResponse deleteComment(@PathVariable Long issuegroupId, @PathVariable Long issueId,
+    @DeleteMapping("/{issueGroupId}/issues/{issueId}/comments/{commentId}")
+    public CommentDeleteResponse deleteComment(@PathVariable Long issueGroupId, @PathVariable Long issueId,
                                                @PathVariable Long commentId) {
         return new CommentDeleteResponse(commentService.deleteComment(commentId));
     }
 
-    @GetMapping("/{issuegroupId}/issues/{issueId}/comments")
-    public List<CommentCache> findComments(@PathVariable Long issuegroupId, @PathVariable Long issueId) {
+    @GetMapping("/{issueGroupId}/issues/{issueId}/comments")
+    public List<CommentCache> findComments(@PathVariable Long issueGroupId, @PathVariable Long issueId) {
         return commentService.findCommentsByIssueId(issueId);
     }
 }

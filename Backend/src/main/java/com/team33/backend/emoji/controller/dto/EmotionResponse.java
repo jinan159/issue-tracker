@@ -6,14 +6,11 @@ import lombok.Getter;
 @Getter
 public class EmotionResponse {
 
-    private Long id;
-    private String value;
+    private final Long id;
+    private final String value;
 
     public EmotionResponse(Emotion emotion) {
         this.id = emotion.getId();
         this.value = emotion.getEmotion();
-    }
-
-    public EmotionResponse() {
     }
 }

@@ -21,11 +21,7 @@ import javax.persistence.PersistenceContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@DataJpaTest
-//@AutoConfigureTestDatabase
-//@Import({TestConfig.class, CommentService.class})
 @SpringBootTest
-@Rollback
 @Transactional
 @DisplayName("CommentService 테스트")
 class CommentServiceTest {
