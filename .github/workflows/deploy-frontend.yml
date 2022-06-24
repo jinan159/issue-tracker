@@ -1,0 +1,63 @@
+name: Frontend Deploy
+
+on:
+  push:
+    branches: [deploy-frontend]
+
+jobs:
+  buildAndDeploy:
+    name: Project Build & Test & Deploy
+    runs-on: ubuntu-18.04
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./Frontend
+
+    steps:
+      # https://github.com/actions/setup-java#basic
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.13
+
+      # https://github.com/actions/cache/blob/main/examples.md#node---npm
+      - name: Get npm cache directory
+        id: npm-cache-dir
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+      - uses: actions/cache@v3
+        id: npm-cache # use this to check for `cache-hit` ==> if: steps.npm-cache.outputs.cache-hit != 'true'
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: npm config set
+        run: npm config set registry https://registry.npmjs.com/
+
+      - name: npm install
+        run: npm install
+
+      - name: build webpack
+        run: npm run build
+
+      - name: AWS Credential 설정
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+      
+      - name: Upload to AWS S3
+        env: 
+          AWS_S3_FE_BUCKET: ${{ secrets.AWS_S3_FE_BUCKET }}
+        run: aws s3 sync ./dist s3://$AWS_S3_FE_BUCKET
+
+      - name: CloudFront cache invalidation
+        env: 
+          AWS_CLOUDFRONT_ID: ${{ secrets.AWS_CLOUDFRONT_ID }}
+        run: | 
+          aws cloudfront create-invalidation \
+            --distribution-id $AWS_CLOUDFRONT_ID --paths /*
+        

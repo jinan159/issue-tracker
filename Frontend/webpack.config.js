@@ -11,6 +11,9 @@ module.exports = {
   mode: 'development',
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.ts'],
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
   },
   entry: path.resolve(__dirname, 'src/index.tsx'),
   output: {
@@ -52,6 +55,10 @@ module.exports = {
       {
         test: /\.(sa|sc|c)ss$/i,
         use: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.svg$/i,
+        use: ['@svgr/webpack', 'url-loader'],
       },
     ],
   },

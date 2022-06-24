@@ -1,3 +1,5 @@
+import { DefaultTheme } from 'styled-components';
+
 const colors = {
   greyScale: {
     titleActive: '#14142B',
@@ -46,14 +48,17 @@ const width = {
   },
 };
 
-const theme = {
+const theme: DefaultTheme = {
   colors,
   mixins,
   width,
 };
 
+type ColorType = typeof colors;
+type MixinsType = typeof mixins;
+type WidthType = typeof width;
 type ThemeType = typeof theme;
 
-export type { ThemeType };
+export type { ColorType, MixinsType, ThemeType, WidthType };
 
 export default theme;
