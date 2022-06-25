@@ -19,6 +19,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
@@ -45,6 +46,9 @@ public class Issue extends CommonEntity {
     @JoinColumn(name = "author_id", nullable = false)
     private Member author;
 
+    @Lob
+    private String content;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private IssueStatus issueStatus;
@@ -66,11 +70,15 @@ public class Issue extends CommonEntity {
     @OneToMany(mappedBy = "issue", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Emoji> emojis = new ArrayList<>();
 
+    @OneToMany(mappedBy = "issue")
+    private List<IssueLabel> labels = new ArrayList<>();
+
     public Issue(String title, Member author, IssueGroup issueGroup) {
         this.title = title;
         this.author = author;
         this.issueStatus = initIssueStatus();
         this.issueGroup = issueGroup;
+        this.deleted = new Deleted();
     }
 
     public Issue(String title) {
@@ -97,6 +105,10 @@ public class Issue extends CommonEntity {
 
     private IssueStatus initIssueStatus() {
         return IssueStatus.OPEN;
+    }
+
+    public void close() {
+        this.issueStatus = IssueStatus.CLOSED;
     }
 
     @Override

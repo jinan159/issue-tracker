@@ -6,12 +6,9 @@ import lombok.Getter;
 @Getter
 public class MilestoneDeleteResponse {
 
-    private Long id;
+    private final Long id;
 
     public MilestoneDeleteResponse(Milestone milestone) {
         this.id = milestone.getId();
-    }
-
-    public MilestoneDeleteResponse() {
     }
 }

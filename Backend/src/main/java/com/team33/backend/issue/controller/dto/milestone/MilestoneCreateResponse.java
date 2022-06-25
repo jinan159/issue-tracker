@@ -6,14 +6,11 @@ import lombok.Getter;
 @Getter
 public class MilestoneCreateResponse {
 
-    private Long id;
-    private String title;
+    private final Long id;
+    private final String title;
 
     public MilestoneCreateResponse(Milestone milestone) {
         this.id = milestone.getId();
         this.title = milestone.getTitle();
-    }
-
-    public MilestoneCreateResponse() {
     }
 }

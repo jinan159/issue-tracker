@@ -118,10 +118,7 @@ public class Comment extends CommonEntity {
 
     public void addImages(List<Image> images) {
         for (Image image : images) {
-            if (image != null) {
-                this.images.add(image);
-                image.addImageToComment(this);
-            }
+            addImage(image);
         }
     }
 

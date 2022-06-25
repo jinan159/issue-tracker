@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 public class CommentDetailResponse {
 
-    private Long id;
+    private final Long id;
 
     public CommentDetailResponse(CommentCache commentCache) {
         this.id = commentCache.getId();

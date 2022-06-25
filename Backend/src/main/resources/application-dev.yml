@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/issue_tracker
+    username: root
+    password: 1234
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+logging:
+  level:
+    com.team33.backend: debug
+    org.springframework.web.servlet: trace

@@ -46,19 +46,6 @@ public class Milestone extends CommonEntity {
     protected Milestone() {
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Milestone)) return false;
-        Milestone entity = (Milestone) o;
-        return Objects.equals(id, entity.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
     public void editMilestone(String title, String description, LocalDate deadline) {
         editTitle(title);
         editDescription(description);
