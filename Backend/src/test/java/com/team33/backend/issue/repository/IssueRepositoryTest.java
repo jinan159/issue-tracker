@@ -102,9 +102,10 @@ class IssueRepositoryTest {
             int expectedSize = 1;
             IssueStatus status = IssueStatus.OPEN;
             Issue savedIssue = saveNewIssue(status);
+            IssueGroup issueGroup = savedIssue.getIssueGroup();
 
             // when
-            List<Issue> issues = issueRepository.findAllByIssueStatus(status, Pageable.unpaged());
+            List<Issue> issues = issueRepository.findAllByIssueGroupIdAndIssueStatus(issueGroup.getId(), status, Pageable.unpaged());
 
             // then
             assertThat(issues).isNotNull();
@@ -121,9 +122,10 @@ class IssueRepositoryTest {
             int expectedSize = 1;
             IssueStatus status = IssueStatus.CLOSED;
             Issue savedIssue = saveNewIssue(status);
+            IssueGroup issueGroup = savedIssue.getIssueGroup();
 
             // when
-            List<Issue> issues = issueRepository.findAllByIssueStatus(status, Pageable.unpaged());
+            List<Issue> issues = issueRepository.findAllByIssueGroupIdAndIssueStatus(issueGroup.getId(), status, Pageable.unpaged());
 
             // then
             assertThat(issues).isNotNull();
@@ -136,8 +138,13 @@ class IssueRepositoryTest {
 
         @Test
         void 이슈가_없으면_빈_리스트를_반환한다() {
+            // given
+            long issueGroupId = 1L;
+            IssueStatus open = IssueStatus.OPEN;
+            Pageable pageable = Pageable.unpaged();
+
             // when
-            List<Issue> issues = issueRepository.findAllByIssueStatus(IssueStatus.OPEN, Pageable.unpaged());
+            List<Issue> issues = issueRepository.findAllByIssueGroupIdAndIssueStatus(issueGroupId, open, pageable);
 
             // then
             assertThat(issues).isNotNull();

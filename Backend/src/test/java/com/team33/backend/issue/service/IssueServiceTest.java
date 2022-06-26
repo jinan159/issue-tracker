@@ -16,11 +16,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-@Sql(value = {"classpath:sql/Issue_label_assignee-delete.sql", "classpath:sql/Issue_label_assignee-data.sql"})
+@Sql(value = {"classpath:sql/Issue_label_assignee-data.sql"})
 class IssueServiceTest {
 
     private final int OPEN_COUNT = 2;
     private final int CLOSED_COUNT = 0;
+    private final int ISSUE_GROUP_ID = 1;
 
     @Autowired
     private IssueService issueService;
@@ -31,7 +32,7 @@ class IssueServiceTest {
         IssueStatus open = IssueStatus.OPEN;
 
         // when
-        IssueListResponse issues = issueService.findAllIssueWithStatus(new IssueListRequest(Pageable.unpaged(), open.name()));
+        IssueListResponse issues = issueService.findAllIssueWithStatus(new IssueListRequest(Pageable.unpaged(), open, ISSUE_GROUP_ID));
 
         // then
         assertThat(issues).isNotNull();
@@ -47,7 +48,7 @@ class IssueServiceTest {
         IssueStatus closed = IssueStatus.CLOSED;
 
         // when
-        IssueListResponse issues = issueService.findAllIssueWithStatus(new IssueListRequest(Pageable.unpaged(), closed.name()));
+        IssueListResponse issues = issueService.findAllIssueWithStatus(new IssueListRequest(Pageable.unpaged(), closed, ISSUE_GROUP_ID));
 
         // then
         assertThat(issues).isNotNull();
@@ -55,11 +56,5 @@ class IssueServiceTest {
         assertThat(issues.getClosedIssueCount()).isEqualTo(CLOSED_COUNT);
         assertThat(issues.getIssues()).isNotNull();
         assertThat(issues.getIssues()).size().isEqualTo(CLOSED_COUNT);
-    }
-
-    @AfterAll
-    @Sql("classpath:sql/Issue_label_assignee-delete.sql")
-    static void afterAll() {
-
     }
 }

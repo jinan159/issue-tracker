@@ -32,3 +32,9 @@ include::{snippets}/issue-list/response-body.adoc[]
 
 === http response fields
 include::{snippets}/issue-list/response-fields.adoc[]
+
+== 필터 목록 조회 API
+
+필터 목록을 조회하는 API 입니다.
+
+include::{docdir}/filter-list.adoc[]

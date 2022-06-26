@@ -24,7 +24,10 @@ public class IssueService {
     @Transactional(readOnly = true)
     public IssueListResponse findAllIssueWithStatus(IssueListRequest request) {
 
-        List<Issue> issues = issueRepository.findAllByIssueStatus(request.getStatus(), request.getPageable());
+        List<Issue> issues = issueRepository.findAllByIssueGroupIdAndIssueStatus(
+                request.getIssueGroupId(),
+                request.getStatus(),
+                request.getPageable());
 
         List<IssueResponse> issueResponses = getIssueResponses(issues);
 
