@@ -4,18 +4,15 @@ import com.team33.backend.issue.domain.Milestone;
 import lombok.Getter;
 
 @Getter
-public class MilestomeEditResponse {
+public class MilestoneEditResponse {
 
-    private Long id;
-    private String title;
-    private String description;
+    private final Long id;
+    private final String title;
+    private final String description;
 
-    public MilestomeEditResponse(Milestone milestone) {
+    public MilestoneEditResponse(Milestone milestone) {
         this.id = milestone.getId();
         this.title = milestone.getTitle();
         this.description = milestone.getDescription();
-    }
-
-    public MilestomeEditResponse() {
     }
 }

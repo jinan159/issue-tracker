@@ -32,8 +32,6 @@ public class Label {
     protected Label() {
     }
 
-    ;
-
     public Label(String name, String description, String color) {
         this.name = name;
         this.description = description;
@@ -52,19 +50,6 @@ public class Label {
             throw new IllegalArgumentException("Label 색상을 선택해주세요.");
         }
         this.color = color;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Label)) return false;
-        Label entity = (Label) o;
-        return Objects.equals(id, entity.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 
 }

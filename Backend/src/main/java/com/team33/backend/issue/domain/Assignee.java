@@ -26,17 +26,4 @@ public class Assignee {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "issue_id", nullable = false)
     private Issue issue;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Assignee)) return false;
-        Assignee entity = (Assignee) o;
-        return Objects.equals(id, entity.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

@@ -1,7 +1,7 @@
 package com.team33.backend.issue.controller;
 
-import com.team33.backend.issue.controller.dto.milestone.MilestomeEditRequest;
-import com.team33.backend.issue.controller.dto.milestone.MilestomeEditResponse;
+import com.team33.backend.issue.controller.dto.milestone.MilestoneEditRequest;
+import com.team33.backend.issue.controller.dto.milestone.MilestoneEditResponse;
 import com.team33.backend.issue.controller.dto.milestone.MilestoneCreateRequest;
 import com.team33.backend.issue.controller.dto.milestone.MilestoneCreateResponse;
 import com.team33.backend.issue.controller.dto.milestone.MilestoneDeleteResponse;
@@ -26,30 +26,30 @@ public class MilestoneController {
 
     private final MilestoneService milestoneService;
 
-    @GetMapping("/{issuegroupId}/milestone/{milestoneId}")
-    public MilestoneResponse getMilestoneByIssuegroupId(@PathVariable Long issuegroupId, @PathVariable Long milestoneId) {
+    @GetMapping("/{issueGroupId}/milestone/{milestoneId}")
+    public MilestoneResponse getMilestoneByIssuegroupId(@PathVariable Long issueGroupId, @PathVariable Long milestoneId) {
         return new MilestoneResponse(milestoneService.findMilestoneByIssuegroupId(milestoneId));
     }
 
-    @GetMapping("/{issuegroupId}/milestones")
-    public List<MilestoneResponse> getMilestonesByIssuegroupId(@PathVariable Long issuegroupId) {
-        return milestoneService.findMilestoneByIssueId(issuegroupId);
+    @GetMapping("/{issueGroupId}/milestones")
+    public List<MilestoneResponse> getMilestonesByIssuegroupId(@PathVariable Long issueGroupId) {
+        return milestoneService.findMilestoneByIssueId(issueGroupId);
     }
 
-    @PostMapping("/{issuegroupId}/milestones/{milestoneId}")
-    public MilestoneCreateResponse createMilestone(@PathVariable Long issuegroupId, @PathVariable Long milestoneId,
+    @PostMapping("/{issueGroupId}/milestones/{milestoneId}")
+    public MilestoneCreateResponse createMilestone(@PathVariable Long issueGroupId, @PathVariable Long milestoneId,
                                                    @RequestBody MilestoneCreateRequest request) {
         return new MilestoneCreateResponse(milestoneService.createMilestone(request));
     }
 
-    @PutMapping("/{issuegroupId}/milestones/{milestoneId}")
-    public MilestomeEditResponse editMilestone(@PathVariable Long issuegroupId, @PathVariable Long milestoneId,
-                                               @RequestBody MilestomeEditRequest request) {
-        return new MilestomeEditResponse(milestoneService.editMilestone(milestoneId, request));
+    @PutMapping("/{issueGroupId}/milestones/{milestoneId}")
+    public MilestoneEditResponse editMilestone(@PathVariable Long issueGroupId, @PathVariable Long milestoneId,
+                                               @RequestBody MilestoneEditRequest request) {
+        return new MilestoneEditResponse(milestoneService.editMilestone(milestoneId, request));
     }
 
-    @DeleteMapping("/{issuegroupId}/milestones/{milestoneId}")
-    public MilestoneDeleteResponse deleteMilestone(@PathVariable Long issuegroupId, @PathVariable Long milestoneId) {
+    @DeleteMapping("/{issueGroupId}/milestones/{milestoneId}")
+    public MilestoneDeleteResponse deleteMilestone(@PathVariable Long issueGroupId, @PathVariable Long milestoneId) {
         return new MilestoneDeleteResponse(milestoneService.deleteMilestoneById(milestoneId));
     }
 }

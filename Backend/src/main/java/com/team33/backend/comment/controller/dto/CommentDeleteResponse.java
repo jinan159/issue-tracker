@@ -6,12 +6,9 @@ import lombok.Getter;
 @Getter
 public class CommentDeleteResponse {
 
-    private Long id;
+    private final Long id;
 
     public CommentDeleteResponse(Comment comment) {
         this.id = comment.getId();
-    }
-
-    public CommentDeleteResponse() {
     }
 }

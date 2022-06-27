@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 
 import * as S from './style';
 
-const LOGIN_ID = 'loginId';
-const LOGIN_PASSWORD = 'loginPassword';
-
 export default function Login() {
   const issueNumber = 1;
   const [loginInputValue, setLoginInputValue] = useState({
@@ -17,14 +14,19 @@ export default function Login() {
     loginInputValue.id !== '' && loginInputValue.password !== '';
 
   const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.currentTarget.classList.contains(LOGIN_ID)) {
-        setLoginInputValue({ ...loginInputValue, id: e.currentTarget.value });
-      } else if (e.currentTarget.classList.contains(LOGIN_PASSWORD)) {
-        setLoginInputValue({
-          ...loginInputValue,
-          password: e.currentTarget.value,
-        });
+    (e: React.ChangeEvent<HTMLInputElement>, type: 'id' | 'password') => {
+      switch (type) {
+        case 'id':
+          setLoginInputValue({ ...loginInputValue, id: e.currentTarget.value });
+          break;
+        case 'password':
+          setLoginInputValue({
+            ...loginInputValue,
+            password: e.currentTarget.value,
+          });
+          break;
+        default:
+          break;
       }
     },
     [loginInputValue]
@@ -39,15 +41,13 @@ export default function Login() {
       <S.Content>or</S.Content>
       <S.LoginInput
         type="text"
-        className={LOGIN_ID}
         placeholder="아이디"
-        onChange={handleChange}
+        onChange={(e) => handleChange(e, 'id')}
       />
       <S.LoginInput
         type="text"
-        className={LOGIN_PASSWORD}
         placeholder="비밀번호"
-        onChange={handleChange}
+        onChange={(e) => handleChange(e, 'password')}
       />
       {/* TODO : issue 목록중 하나 선택 예시, 추후 이슈 목록 완성되면 그곳에 Link */}
       <S.LoginLink to={`/issue/${issueNumber}`}>

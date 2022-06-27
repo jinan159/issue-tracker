@@ -37,17 +37,4 @@ public class IssueGroup extends CommonEntity {
     public IssueGroup(String name) {
         this.name = name;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof IssueGroup)) return false;
-        IssueGroup entity = (IssueGroup) o;
-        return Objects.equals(id, entity.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
 }

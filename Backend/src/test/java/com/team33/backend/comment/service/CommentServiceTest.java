@@ -13,7 +13,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
@@ -21,11 +20,7 @@ import javax.persistence.PersistenceContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@DataJpaTest
-//@AutoConfigureTestDatabase
-//@Import({TestConfig.class, CommentService.class})
 @SpringBootTest
-@Rollback
 @Transactional
 @DisplayName("CommentService 테스트")
 class CommentServiceTest {
@@ -36,21 +31,27 @@ class CommentServiceTest {
     @Autowired
     CommentService commentService;
 
+    private Member savedMember;
+    private IssueGroup savedIssueGroup;
+    private Issue savedIssue;
+
     @BeforeEach
     void setUp() {
         MemberData memberData = new MemberData();
-        entityManager.persist(memberData.getMember());
-        Member savedMember = entityManager.find(Member.class, 1L);
+        savedMember = memberData.getMember();
+        entityManager.persist(savedMember);
+        Member savedMember = entityManager.find(Member.class, this.savedMember.getId());
 
         IssueGroupData issueGroupData = new IssueGroupData();
-        entityManager.persist(issueGroupData.getIssueGroup());
-        IssueGroup savedIssueGroup = entityManager.find(IssueGroup.class, 1L);
+        savedIssueGroup = issueGroupData.getIssueGroup();
+        entityManager.persist(savedIssueGroup);
+        IssueGroup savedIssueGroup = entityManager.find(IssueGroup.class, this.savedIssueGroup.getId());
 
         IssueData issueData = new IssueData();
-        Issue issue = issueData.getIssue();
-        issue.registAuthor(savedMember);
-        issue.registIssueGroup(savedIssueGroup);
-        entityManager.persist(issue);
+        savedIssue = issueData.getIssue();
+        savedIssue.registAuthor(savedMember);
+        savedIssue.registIssueGroup(savedIssueGroup);
+        entityManager.persist(savedIssue);
 
         entityManager.flush();
         entityManager.clear();
@@ -58,10 +59,10 @@ class CommentServiceTest {
 
     @Test
     @DisplayName("이슈에 대한 댓글을 작성하면 해당 댓글이 조회된다.")
-    void 댓글작성() throws Exception {
+    void 댓글작성() {
 
         // given
-        Long issueId = 1L;
+        Long issueId = savedIssue.getId();
         String githubId = "devjun10";
         CommentWriteRequest request = new CommentWriteRequest("Hello-World");
 

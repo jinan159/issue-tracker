@@ -19,14 +19,14 @@ public class LabelController {
 
     private final LabelService labelService;
 
-    @PutMapping("/{issuegroupId}/labels/{labelId}")
-    public LabelEditResponse editLabel(@PathVariable Long issuegroupId, @PathVariable Long labelId,
+    @PutMapping("/{issueGroupId}/labels/{labelId}")
+    public LabelEditResponse editLabel(@PathVariable Long issueGroupId, @PathVariable Long labelId,
                                        @RequestBody LabelEditRequest request){
         return new LabelEditResponse(labelService.editLabel(labelId, request));
     }
 
-    @DeleteMapping("/{issuegroupId}/labels/{labelId}")
-    public LabelDeleteResponse editLabel(@PathVariable Long issuegroupId, @PathVariable Long labelId){
+    @DeleteMapping("/{issueGroupId}/labels/{labelId}")
+    public LabelDeleteResponse editLabel(@PathVariable Long issueGroupId, @PathVariable Long labelId){
         return new LabelDeleteResponse(labelService.deleteLabelById(labelId));
     }
 }

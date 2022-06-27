@@ -5,12 +5,9 @@ import lombok.Getter;
 @Getter
 public class MilestoneCount {
 
-    private long count;
+    private final long count;
 
     public MilestoneCount(long count) {
         this.count = count;
-    }
-
-    public MilestoneCount() {
     }
 }
