@@ -12,6 +12,6 @@ import java.time.LocalDate;
 public class MilestoneCreateRequest {
 
     private String title;
-    private LocalDate deadline;
     private String description;
+    private LocalDate deadline;
 }

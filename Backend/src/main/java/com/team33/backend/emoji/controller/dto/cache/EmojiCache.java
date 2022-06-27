@@ -19,13 +19,4 @@ public class EmojiCache {
 
     public EmojiCache() {
     }
-
-    @Override
-    public String toString() {
-        return "EmojiCache{" +
-                "id=" + id +
-                ", emotion='" + emotion + '\'' +
-                ", commentId=" + commentId +
-                '}';
-    }
 }
