@@ -1,15 +1,11 @@
 package com.team33.backend.issue.repository.query;
 
-import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.team33.backend.comment.domain.QComment;
 import com.team33.backend.issue.domain.Issue;
 import com.team33.backend.issue.domain.IssueStatus;
-import com.team33.backend.issue.domain.QAssignee;
 import com.team33.backend.issue.domain.QIssue;
 import com.team33.backend.issue.domain.filter.IssueFilter;
-import com.team33.backend.issuegroup.domain.IssueGroup;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.Querydsl;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;

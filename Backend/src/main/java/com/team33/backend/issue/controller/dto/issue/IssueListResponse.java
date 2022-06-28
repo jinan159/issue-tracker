@@ -14,8 +14,6 @@ public class IssueListResponse {
 
     public IssueListResponse(List<IssueResponse> issues, int openIssueCount, int closedIssueCount) {
         this.issues = issues;
-        System.out.println("======================================================");
-        System.out.println(issues);
         this.openIssueCount = openIssueCount;
         this.closedIssueCount = closedIssueCount;
     }
