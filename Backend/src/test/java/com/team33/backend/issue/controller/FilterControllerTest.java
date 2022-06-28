@@ -1,7 +1,8 @@
 package com.team33.backend.issue.controller;
 
+import com.team33.backend.issue.controller.dto.FilterListResponse;
 import com.team33.backend.issue.controller.dto.filter.FilterResponse;
-import com.team33.backend.issue.service.FilterService;
+import com.team33.backend.issue.service.IssueFilterService;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class FilterControllerTest {
 
     @MockBean
-    private FilterService filterService;
+    private IssueFilterService issueFilterService;
 
     @Autowired
     private MockMvc mockMvc;
@@ -38,14 +39,16 @@ class FilterControllerTest {
     @Test
     void 필터_목록을_조회하면_필터_목록이_반환된다() throws Exception {
         // given
+        String expectedSeparator = "+";
         List<FilterResponse> filterResponses =  List.of(
                 new FilterResponse("is:test", "테스트입니다"),
                 new FilterResponse("commented:@me", "댓글단것"),
                 new FilterResponse("assigned:@me", "할당된것")
         );
+        FilterListResponse filterListResponse = new FilterListResponse(filterResponses, expectedSeparator);
 
-        BDDMockito.given(filterService.findAllFilters())
-                .willReturn(filterResponses);
+        BDDMockito.given(issueFilterService.findAllFilters())
+                .willReturn(filterListResponse);
 
         // when
         ResultActions performResult = mockMvc.perform(get("/api/filters"));
@@ -56,16 +59,18 @@ class FilterControllerTest {
         for (int i = 0; i < filterResponses.size(); i++) {
             FilterResponse expectedResponse = filterResponses.get(i);
 
-            performResult.andExpect(jsonPath("$.[%d].filter", i).value(expectedResponse.getFilter()));
-            performResult.andExpect(jsonPath("$.[%d].description", i).value(expectedResponse.getDescription()));
+            performResult.andExpect(jsonPath("$.separator").value(expectedSeparator));
+            performResult.andExpect(jsonPath("$.filters.[%d].filter", i).value(expectedResponse.getFilter()));
+            performResult.andExpect(jsonPath("$.filters.[%d].description", i).value(expectedResponse.getDescription()));
         }
 
         performResult.andDo(document("filter-list",
                 getDocumentRequest(),
                 getDocumentResponse(),
                 responseFields(
-                        fieldWithPath("[].filter").type(JsonFieldType.STRING).description("필터"),
-                        fieldWithPath("[].description").type(JsonFieldType.STRING).description("필터 설명")
+                        fieldWithPath("separator").type(JsonFieldType.STRING).description("필터 구분자 ex) 필터+필터"),
+                        fieldWithPath("filters.[].filter").type(JsonFieldType.STRING).description("필터"),
+                        fieldWithPath("filters.[].description").type(JsonFieldType.STRING).description("필터 설명")
                 )));
     }
 

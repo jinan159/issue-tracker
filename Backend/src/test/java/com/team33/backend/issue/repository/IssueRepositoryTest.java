@@ -4,7 +4,6 @@ import com.team33.backend.issue.domain.Issue;
 import com.team33.backend.issue.domain.IssueStatus;
 import com.team33.backend.issuegroup.domain.IssueGroup;
 import com.team33.backend.issuegroup.repository.IssueGroupRepository;
-import com.team33.backend.member.domain.Member;
 import com.team33.backend.member.repository.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -30,11 +29,15 @@ class IssueRepositoryTest {
     @Autowired
     private IssueRepository issueRepository;
 
+    private IssueRepositoryUtils issueRepositoryUtils;
+
     @BeforeEach
     void setUp() {
         issueRepository.deleteAll();
         memberRepository.deleteAll();
         issueGroupRepository.deleteAll();
+
+        issueRepositoryUtils = new IssueRepositoryUtils(memberRepository, issueGroupRepository, issueRepository);
     }
 
     @Nested
@@ -44,10 +47,11 @@ class IssueRepositoryTest {
         @Test
         void 열린_이슈가_없을때_열린이슈개수는_0_이다() {
             // given
+            long issueGroupId = 1L;
             int expectedCount = 0;
 
             // when
-            int openIssueCount = issueRepository.countByIssueStatus(IssueStatus.OPEN);
+            int openIssueCount = issueRepository.countByIssueGroupIdAndIssueStatus(issueGroupId, IssueStatus.OPEN);
 
             // then
             assertThat(openIssueCount).isEqualTo(expectedCount);
@@ -56,10 +60,11 @@ class IssueRepositoryTest {
         @Test
         void 닫힌_이슈가_없을때_닫힌이슈개수는_0_이다() {
             // given
+            long issueGroupId = 1L;
             int expectedCount = 0;
 
             // when
-            int openIssueCount = issueRepository.countByIssueStatus(IssueStatus.CLOSED);
+            int openIssueCount = issueRepository.countByIssueGroupIdAndIssueStatus(issueGroupId, IssueStatus.CLOSED);
 
             // then
             assertThat(openIssueCount).isEqualTo(expectedCount);
@@ -68,11 +73,12 @@ class IssueRepositoryTest {
         @Test
         void 열린_이슈가_1개_있으면_열린이슈개수개수는_1_이다() {
             // given
-            saveNewIssue(IssueStatus.OPEN);
+            IssueGroup issueGroup = issueRepositoryUtils.saveNewIssueGroup();
+            issueRepositoryUtils.saveNewIssue(issueGroup, IssueStatus.OPEN);
             int expectedCount = 1;
 
             // when
-            int openIssueCount = issueRepository.countByIssueStatus(IssueStatus.OPEN);
+            int openIssueCount = issueRepository.countByIssueGroupIdAndIssueStatus(issueGroup.getId(), IssueStatus.OPEN);
 
             // then
             assertThat(openIssueCount).isEqualTo(expectedCount);
@@ -81,11 +87,13 @@ class IssueRepositoryTest {
         @Test
         void 닫힌_이슈가_1개_있으면_닫힌이슈개수는_1_이다() {
             // given
-            saveNewIssue(IssueStatus.CLOSED);
+            IssueStatus closed = IssueStatus.CLOSED;
+            IssueGroup issueGroup = issueRepositoryUtils.saveNewIssueGroup();
+            Issue issue = issueRepositoryUtils.saveNewIssue(issueGroup, closed);
             int expectedCount = 1;
 
             // when
-            int openIssueCount = issueRepository.countByIssueStatus(IssueStatus.CLOSED);
+            int openIssueCount = issueRepository.countByIssueGroupIdAndIssueStatus(issueGroup.getId(), closed);
 
             // then
             assertThat(openIssueCount).isEqualTo(expectedCount);
@@ -101,7 +109,7 @@ class IssueRepositoryTest {
             // given
             int expectedSize = 1;
             IssueStatus status = IssueStatus.OPEN;
-            Issue savedIssue = saveNewIssue(status);
+            Issue savedIssue = issueRepositoryUtils.saveNewIssue(status);
             IssueGroup issueGroup = savedIssue.getIssueGroup();
 
             // when
@@ -121,7 +129,7 @@ class IssueRepositoryTest {
             // given
             int expectedSize = 1;
             IssueStatus status = IssueStatus.CLOSED;
-            Issue savedIssue = saveNewIssue(status);
+            Issue savedIssue = issueRepositoryUtils.saveNewIssue(status);
             IssueGroup issueGroup = savedIssue.getIssueGroup();
 
             // when
@@ -150,19 +158,6 @@ class IssueRepositoryTest {
             assertThat(issues).isNotNull();
             assertThat(issues).isEmpty();
         }
-    }
-
-    private Issue saveNewIssue(IssueStatus issueStatus) {
-        Member member = memberRepository.save(new Member("jay", "jinan159", "https://profile.image.url"));
-        IssueGroup group = issueGroupRepository.save(new IssueGroup("default"));
-
-        Issue issue = new Issue("안녕하세요", member, group);
-
-        if (IssueStatus.CLOSED.equals(issueStatus)) {
-            issue.close();
-        }
-
-        return issueRepository.save(issue);
     }
 
     private void assertIssue(Issue issue, Issue savedIssue) {

@@ -1,23 +1,21 @@
 package com.team33.backend.issue.controller;
 
-import com.team33.backend.issue.controller.dto.filter.FilterResponse;
-import com.team33.backend.issue.service.FilterService;
+import com.team33.backend.issue.controller.dto.FilterListResponse;
+import com.team33.backend.issue.service.IssueFilterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
 public class FilterController {
 
-    private final FilterService filterService;
+    private final IssueFilterService issueFilterService;
 
     @GetMapping("/filters")
-    public List<FilterResponse> filterList() {
-        return filterService.findAllFilters();
+    public FilterListResponse filterList() {
+        return issueFilterService.findAllFilters();
     }
 }

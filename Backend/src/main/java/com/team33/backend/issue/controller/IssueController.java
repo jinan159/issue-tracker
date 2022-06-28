@@ -22,12 +22,21 @@ public class IssueController {
 
     @GetMapping("/{issueGroupId}/issues")
     public IssueListResponse issueList(
+            @PathVariable("issueGroupId") long issueGroupId,
             @PageableDefault Pageable pageable,
             @RequestParam("status") String status,
-            @PathVariable("issueGroupId") long issueGroupId
+            @RequestParam(value = "q", required = false) String filterQuery
     ) {
         IssueListRequest issueListRequest = new IssueListRequest(pageable, IssueStatus.parse(status), issueGroupId);
 
-        return issueService.findAllIssueWithStatus(issueListRequest);
+        if (isNullOrEmpty(filterQuery)) {
+            return issueService.findAllIssueWithStatus(issueListRequest);
+        }
+
+        return issueService.findAllIssueWithStatusAndFilter(issueListRequest, filterQuery);
+    }
+
+    private boolean isNullOrEmpty(String filterQuery) {
+        return filterQuery == null || filterQuery.isEmpty();
     }
 }
