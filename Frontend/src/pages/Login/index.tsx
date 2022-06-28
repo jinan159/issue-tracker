@@ -1,7 +1,9 @@
+import axios, { AxiosResponse } from 'axios';
 import React, { useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import * as S from './style';
+
+const LOGIN_REQUEST_URL = '/login';
 
 export default function Login() {
   const issueNumber = 1;
@@ -32,12 +34,20 @@ export default function Login() {
     [loginInputValue]
   );
 
+  const handleClickLogin = async () => {
+    const url: AxiosResponse = await axios.get(LOGIN_REQUEST_URL);
+    console.log(url.data);
+    window.location.href = url.data;
+  };
+
   return (
     <S.LoginContainer>
       <S.Title>Issue Tracker</S.Title>
-      <Link to="/main">
-        <S.OauthButton type="button" content="GitHub 계정으로 로그인" />
-      </Link>
+      <S.OauthButton
+        type="button"
+        content="GitHub 계정으로 로그인"
+        handleClick={handleClickLogin}
+      />
       <S.Content>or</S.Content>
       <S.LoginInput
         type="text"

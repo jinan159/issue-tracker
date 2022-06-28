@@ -37,6 +37,14 @@ module.exports = {
     port: 8080,
     historyApiFallback: true,
     open: true,
+    proxy: {
+      '/login': {
+        target: process.env.SERVER_ENDPOINT,
+      },
+      '/api': {
+        target: process.env.SERVER_ENDPOINT,
+      },
+    },
   },
   module: {
     rules: [
