@@ -1,0 +1,14 @@
+=== curl
+include::{snippets}/emotion-list/curl-request.adoc[]
+
+=== http request
+include::{snippets}/emotion-list/http-request.adoc[]
+
+=== http response
+include::{snippets}/emotion-list/http-response.adoc[]
+
+=== http response body
+include::{snippets}/emotion-list/response-body.adoc[]
+
+=== http response fields
+include::{snippets}/emotion-list/response-fields.adoc[]

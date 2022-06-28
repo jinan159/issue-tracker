@@ -1,0 +1,17 @@
+=== curl
+include::{snippets}/milestone-get/curl-request.adoc[]
+
+=== http request
+include::{snippets}/milestone-get/http-request.adoc[]
+
+=== http request
+include::{snippets}/milestone-get/request-parameters.adoc[]
+
+=== http response
+include::{snippets}/milestone-get/http-response.adoc[]
+
+=== http response body
+include::{snippets}/milestone-get/response-body.adoc[]
+
+=== http response fields
+include::{snippets}/milestone-get/response-fields.adoc[]
