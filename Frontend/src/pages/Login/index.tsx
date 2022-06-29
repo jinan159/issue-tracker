@@ -36,7 +36,6 @@ export default function Login() {
 
   const handleClickLogin = async () => {
     const url: AxiosResponse = await axios.get(LOGIN_REQUEST_URL);
-    console.log(url.data);
     window.location.href = url.data;
   };
 

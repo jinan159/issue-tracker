@@ -31,7 +31,7 @@ const defaultContents: { [key: string]: string | undefined } = {
   line: '작성자',
 };
 
-function Label({
+export default function Label({
   size,
   labelStyle,
   iconType = 'alert',
@@ -47,5 +47,3 @@ function Label({
     </S.Label>
   );
 }
-
-export default Label;

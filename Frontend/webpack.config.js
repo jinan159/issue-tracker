@@ -13,6 +13,7 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.ts'],
     alias: {
       '@': path.resolve(__dirname, 'src'),
+      '@public': path.resolve(__dirname, 'public'),
     },
   },
   entry: path.resolve(__dirname, 'src/index.tsx'),

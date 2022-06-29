@@ -8,7 +8,7 @@ const LOADING = 'Loading...';
 
 const CALLBACK_URL = '/api/oauth/callback';
 
-function Loading() {
+export default function Loading() {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -37,5 +37,3 @@ function Loading() {
     </S.Container>
   );
 }
-
-export default Loading;

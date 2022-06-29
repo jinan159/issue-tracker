@@ -29,7 +29,7 @@ const iconObj = {
   mileStone: MileStone,
 };
 
-function Icons({
+export default function Icons({
   type,
   size = BASIC_SIZE,
   fill,
@@ -57,5 +57,3 @@ function Icons({
 
   return <StyledIcon width={size} height={size} viewBox={BASIC_VIEWBOX} />;
 }
-
-export default Icons;

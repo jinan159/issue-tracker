@@ -30,8 +30,9 @@ const SortButton = styled(Button)`
 `;
 
 const Wrapper1 = styled.div`
-  *:not(:last-child) {
-    margin-right: 32px;
+  ${({ theme }) => theme.mixins.flexBox('row', 'center', 'center')};
+  & > :not(:last-child) {
+    margin-right: 22px;
   }
 `;
 

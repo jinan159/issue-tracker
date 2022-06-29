@@ -1,16 +1,19 @@
+import { IssueListProps, IssueType } from '@/components/IssueTable/type';
+
 import IssueItem from '../IssueItem';
 import * as S from './style';
 
-type IssueListProps = {
-  issueList: string[];
-};
-
-function IssueList({ issueList }: IssueListProps) {
-  if (issueList.length === 0) {
+export default function IssueList({ issueData }: IssueListProps) {
+  const { issues } = issueData;
+  if (!issues) {
     return <S.ZeroList>There are not any issues</S.ZeroList>;
   }
 
-  return <IssueItem />;
+  return (
+    <>
+      {issues.map((issue: IssueType) => (
+        <IssueItem key={issue.id} issue={issue} />
+      ))}
+    </>
+  );
 }
-
-export default IssueList;

@@ -1,5 +1,3 @@
-import styled from 'styled-components';
-
 import { ReactComponent as Alert } from '@/assets/icons/alert-circle.svg';
 import { ReactComponent as Archive } from '@/assets/icons/archive.svg';
 import { ReactComponent as Plus } from '@/assets/icons/plus.svg';
@@ -12,8 +10,6 @@ export type IconType = keyof iconComponentMapType;
 type IconsProps = {
   type: IconType;
   size?: string;
-  color?: string;
-  fill?: string;
 };
 
 const BASIC_SIZE = '16';
@@ -26,17 +22,7 @@ const iconComponentMap = {
   archive: Archive,
 };
 
-function Icons({ type, size = BASIC_SIZE, color, fill }: IconsProps) {
+export default function Icons({ type, size = BASIC_SIZE }: IconsProps) {
   const Icon = iconComponentMap[type];
-  const StyledIcon = styled(Icon)`
-    path {
-      stroke: ${color};
-    }
-    * {
-      fill: ${fill};
-    }
-  `;
-  return <StyledIcon width={size} height={size} viewBox={BASIC_VIEWBOX} />;
+  return <Icon width={size} height={size} viewBox={BASIC_VIEWBOX} />;
 }
-
-export default Icons;

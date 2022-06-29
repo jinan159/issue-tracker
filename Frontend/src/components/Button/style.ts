@@ -10,7 +10,7 @@ import {
 
 const getButtonInnerColorStyle = (color: string) => `
   color: ${color};
-  svg > path {
+  svg > * {
     stroke: ${color};
   }
 `;
@@ -101,7 +101,6 @@ const smallSecondaryStyle = css`
 `;
 
 const mediumTextStyle = css`
-  width: 87px;
   height: 32px;
   font-weight: 700;
   font-size: 16px;

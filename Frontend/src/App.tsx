@@ -5,7 +5,7 @@ import Router from './router';
 import GlobalStyle from './style/global';
 import theme from './style/theme';
 
-function App() {
+export default function App() {
   return (
     <div className="app">
       <ThemeProvider theme={theme}>
@@ -15,5 +15,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
