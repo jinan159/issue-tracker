@@ -4,7 +4,7 @@
 import { useId } from 'react';
 
 import DropBox from '@/components/DropBox';
-import Icons from '@/components/DropDown/Icons';
+import Filter from '@/components/Filter';
 import useMouse from '@/hooks/useMouse';
 
 import * as S from './style';
@@ -40,35 +40,17 @@ export default function DropDown({
 
   return (
     <S.Container width={dropDownWidth} height={dropDownHeight}>
-      <S.Filter
-        onMouseOver={handleMouseOver}
-        onMouseOut={handleMouseOut}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-      >
-        <S.DropDown
-          id={`dropdown-${dropDownTitle}-${id}`}
-          type="checkbox"
-          constentsName={`${dropDownTitle}`}
-          labelName={`dropdown-label-${dropDownTitle}`}
-        />
-        <S.DropdownLabel
-          className={`dropdown-label-${dropDownTitle}`}
-          htmlFor={`dropdown-${dropDownTitle}-${id}`}
-        >
-          <S.DropDownTitle isMouseOvered={isMouseOvered}>
-            {dropDownTitle}
-          </S.DropDownTitle>
-        </S.DropdownLabel>
-        <S.IconContainer>
-          <Icons
-            type="bottomArrow"
-            mode={
-              (isActive && 'active') || (isMouseOvered && 'hover') || 'initial'
-            }
-          />
-        </S.IconContainer>
-      </S.Filter>
+      <Filter
+        handleMouseOver={handleMouseOver}
+        handleMouseOut={handleMouseOut}
+        handleMouseDown={handleMouseDown}
+        handleMouseUp={handleMouseUp}
+        dropDownTitle={dropDownTitle}
+        dropDownId={`dropdown-${dropDownTitle}-${id}`}
+        dropDownLabelName={`dropdown-label-${dropDownTitle}`}
+        isMouseOvered={isMouseOvered}
+        isActive={isActive}
+      />
       <S.Content
         className={`${dropDownTitle}`}
         width={dropBoxWidth}
