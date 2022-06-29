@@ -9,6 +9,7 @@ export const Container = styled.div<{
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   border-radius: 11px 0px 0px 11px;
+  border: 1px solid ${({ theme }) => theme.colors.greyScale.border};
 `;
 
 export const Content = styled.div<{

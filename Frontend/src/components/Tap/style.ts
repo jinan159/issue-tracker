@@ -14,5 +14,6 @@ export const StyledTap = styled.button<{
     theme.colors.greyScale.background};
   border-radius: ${({ borderDirection }) =>
     (borderDirection === 'left' && '11px 0px 0px 11px') ||
-    (borderDirection === 'right' && '0px 11px 11px 0px;')};
+    (borderDirection === 'right' && '0px 11px 11px 0px')};
+  border: 1px solid ${({ theme }) => theme.colors.greyScale.border};
 `;

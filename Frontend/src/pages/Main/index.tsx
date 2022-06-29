@@ -1,3 +1,4 @@
+import Button from '@/components/Button';
 import Tap from '@/components/Tap';
 import useMouse from '@/hooks/useMouse';
 
@@ -34,8 +35,8 @@ export default function Main() {
     <>
       <Header />
       <S.Container>
-        <S.SpaceBetweenContainer>
-          <S.FlexContainer>
+        <S.MenuBar>
+          <S.FilterSearchBarContainer>
             <DropDown
               dropDownWidth={dropDownWidth}
               dropDownHeight={dropDownHeight}
@@ -49,32 +50,26 @@ export default function Main() {
               placeholder="is:issue is:open"
               height={dropDownHeight}
             />
-          </S.FlexContainer>
-          <S.TapContainer
-            onMouseOver={handleMouseOver}
-            onMouseOut={handleMouseOut}
-            onMouseDown={handleMouseDown}
-            onMouseUp={handleMouseUp}
-            isMouseOvered={isMouseOvered}
-            isActive={isActive}
-          >
-            <Tap iconType="label" title="레이블" borderDirection="left" />
-            <Tap
-              iconType="mileStone"
-              title="마일스톤"
-              borderDirection="right"
-            />
-          </S.TapContainer>
-          <DropDown
-            dropDownWidth="100px"
-            dropDownHeight="50px"
-            dropBoxWidth={dropBoxWidth}
-            dropDownTitle={dropDownTitle[0]}
-            itemsTitle="상태변경"
-            items={['선택한 이슈 열기', '선택한 이슈 닫기']}
-            isStartFromRight
-          />
-        </S.SpaceBetweenContainer>
+          </S.FilterSearchBarContainer>
+          <S.Menus>
+            <S.TapContainer
+              onMouseOver={handleMouseOver}
+              onMouseOut={handleMouseOut}
+              onMouseDown={handleMouseDown}
+              onMouseUp={handleMouseUp}
+              isMouseOvered={isMouseOvered}
+              isActive={isActive}
+            >
+              <Tap iconType="label" title="레이블" borderDirection="left" />
+              <Tap
+                iconType="mileStone"
+                title="마일스톤"
+                borderDirection="right"
+              />
+            </S.TapContainer>
+            <Button buttonStyle="smallStandard" contents="이슈작성" />
+          </S.Menus>
+        </S.MenuBar>
         <IssueTable />
       </S.Container>
     </>
