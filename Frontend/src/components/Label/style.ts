@@ -1,6 +1,11 @@
 import styled, { css } from 'styled-components';
 
-import { LabelCustomStyleProps, LabelProps } from '@/components/Label/index';
+import {
+  LabelCustomStyleProps,
+  LabelProps,
+  LabelSizeType,
+  LabelStyleType,
+} from '@/components/Label/index';
 
 const getLabelInnerColorStyle = (color: string) => `
   color: ${color};
@@ -52,19 +57,32 @@ const lineStyle = css`
   border: 1px solid ${({ theme }) => theme.colors.greyScale.line};
 `;
 
-const createSize = (size: string) => {
-  if (size === 'large') return large;
-  if (size === 'small') return small;
-  return '';
+const createSize = (size: LabelSizeType) => {
+  switch (size) {
+    case 'large':
+      return large;
+    case 'small':
+      return small;
+    default:
+      return '';
+  }
 };
 
-const createStyle = (style: string) => {
-  if (style === 'open') return openStyle;
-  if (style === 'close') return closeStyle;
-  if (style === 'dark') return darkStyle;
-  if (style === 'light') return lightStyle;
-  if (style === 'line') return lineStyle;
-  return '';
+const createStyle = (style: LabelStyleType) => {
+  switch (style) {
+    case 'open':
+      return openStyle;
+    case 'close':
+      return closeStyle;
+    case 'dark':
+      return darkStyle;
+    case 'light':
+      return lightStyle;
+    case 'line':
+      return lineStyle;
+    default:
+      return '';
+  }
 };
 
 const createCustomStyle = (props: LabelCustomStyleProps) => css`

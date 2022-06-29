@@ -2,8 +2,8 @@ import Icons, { IconType } from '@/components/Icons';
 
 import * as S from './style';
 
-type LabelSizeType = 'large' | 'small';
-type LabelStyleType = 'open' | 'close' | 'light' | 'dark' | 'line';
+export type LabelSizeType = 'large' | 'small';
+export type LabelStyleType = 'open' | 'close' | 'light' | 'dark' | 'line';
 
 export interface LabelCustomStyleProps {
   color?: string;
@@ -20,6 +20,17 @@ export interface LabelProps extends LabelCustomStyleProps {
   contents?: string;
 }
 
+const defaultIcons: { [key: string]: IconType } = {
+  open: 'alert',
+  close: 'archive',
+};
+
+const defaultContents: { [key: string]: string | undefined } = {
+  open: '열린 이슈',
+  close: '닫힌 이슈',
+  line: '작성자',
+};
+
 function Label({
   size,
   labelStyle,
@@ -28,17 +39,6 @@ function Label({
   ...props
 }: LabelProps) {
   const hasIcon = size === 'large';
-
-  const defaultIcons: { [key: string]: IconType } = {
-    open: 'alert',
-    close: 'archive',
-  };
-
-  const defaultContents: { [key: string]: string | undefined } = {
-    open: '열린 이슈',
-    close: '닫힌 이슈',
-    line: '작성자',
-  };
 
   return (
     <S.Label size={size} labelStyle={labelStyle} {...props}>

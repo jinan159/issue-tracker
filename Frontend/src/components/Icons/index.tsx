@@ -5,9 +5,9 @@ import { ReactComponent as Archive } from '@/assets/icons/archive.svg';
 import { ReactComponent as Plus } from '@/assets/icons/plus.svg';
 import { ReactComponent as Search } from '@/assets/icons/search.svg';
 
-type IconObjType = typeof iconObj;
+type iconComponentMapType = typeof iconComponentMap;
 
-export type IconType = keyof IconObjType;
+export type IconType = keyof iconComponentMapType;
 
 type IconsProps = {
   type: IconType;
@@ -19,7 +19,7 @@ type IconsProps = {
 const BASIC_SIZE = '16';
 const BASIC_VIEWBOX = '0 0 16 16';
 
-const iconObj = {
+const iconComponentMap = {
   search: Search,
   alert: Alert,
   plus: Plus,
@@ -27,7 +27,7 @@ const iconObj = {
 };
 
 function Icons({ type, size = BASIC_SIZE, color, fill }: IconsProps) {
-  const Icon = iconObj[type];
+  const Icon = iconComponentMap[type];
   const StyledIcon = styled(Icon)`
     path {
       stroke: ${color};

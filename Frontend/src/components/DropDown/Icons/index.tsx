@@ -1,10 +1,12 @@
-import styled, { useTheme } from 'styled-components';
+import styled from 'styled-components';
 
 import { ReactComponent as Alert } from '@/assets/icons/alert-circle.svg';
 import { ReactComponent as BottomArrow } from '@/assets/icons/bottom-arrow.svg';
 import { ReactComponent as Label } from '@/assets/icons/label.svg';
 import { ReactComponent as MileStone } from '@/assets/icons/mileStone.svg';
 import { ReactComponent as Search } from '@/assets/icons/search.svg';
+
+import iconStyle from './constants';
 
 type IconObjType = typeof iconObj;
 
@@ -34,61 +36,6 @@ function Icons({
   version = 'black',
   mode = 'initial',
 }: IconsProps) {
-  const theme = useTheme();
-
-  const iconStyle = [
-    {
-      iconType: 'bottomArrow',
-      iconVersion: 'black',
-      modes: [
-        {
-          iconMode: 'initial',
-          color: theme.colors.greyScale.label,
-        },
-        {
-          iconMode: 'hover',
-          color: theme.colors.greyScale.body,
-        },
-      ],
-    },
-    {
-      iconType: 'label',
-      iconVersion: 'black',
-      modes: [
-        {
-          iconMode: 'initial',
-          color: theme.colors.greyScale.label,
-        },
-        {
-          iconMode: 'hover',
-          color: theme.colors.greyScale.body,
-        },
-        {
-          iconMode: 'active',
-          color: theme.colors.greyScale.titleActive,
-        },
-      ],
-    },
-    {
-      iconType: 'mileStone',
-      iconVersion: 'black',
-      modes: [
-        {
-          iconMode: 'initial',
-          color: theme.colors.greyScale.label,
-        },
-        {
-          iconMode: 'hover',
-          color: theme.colors.greyScale.body,
-        },
-        {
-          iconMode: 'active',
-          color: theme.colors.greyScale.titleActive,
-        },
-      ],
-    },
-  ];
-
   const Icon = iconObj[type];
   const index = iconStyle.findIndex(
     ({ iconType, iconVersion }) => iconType === type && iconVersion === version

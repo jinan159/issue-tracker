@@ -1,8 +1,11 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-unused-vars */
 import styled, { css } from 'styled-components';
 
 import {
   ButtonCustomStyleProps,
   StyledButtonProps,
+  ButtonStyleType,
 } from '@/components/Button/index';
 
 const getButtonInnerColorStyle = (color: string) => `
@@ -115,14 +118,23 @@ const smallTextStyle = css`
   ${textColor}
 `;
 
-const getButtonStyle = (style: string) => {
-  if (style === 'large') return largeStyle;
-  if (style === 'mediumStandard') return mediumStandardStyle;
-  if (style === 'smallStandard') return smallStandardStyle;
-  if (style === 'smallSecondary') return smallSecondaryStyle;
-  if (style === 'mediumText') return mediumTextStyle;
-  if (style === 'smallText') return smallTextStyle;
-  return '';
+const getButtonStyle = (style: ButtonStyleType) => {
+  switch (style) {
+    case 'large':
+      return largeStyle;
+    case 'mediumStandard':
+      return mediumStandardStyle;
+    case 'smallStandard':
+      return smallStandardStyle;
+    case 'smallSecondary':
+      return smallSecondaryStyle;
+    case 'mediumText':
+      return mediumTextStyle;
+    case 'smallText':
+      return smallTextStyle;
+    default:
+      return '';
+  }
 };
 
 const createCustomStyle = (props: ButtonCustomStyleProps) => css`
@@ -135,6 +147,7 @@ const createCustomStyle = (props: ButtonCustomStyleProps) => css`
   ${props.fontSize && { 'font-size': props.fontSize }}
   ${props.fontWeight && { 'font-weight': props.fontWeight }}
 `;
+
 export const Button = styled.button<StyledButtonProps>`
   ${({ theme }) => theme.mixins.flexBox('row', 'center', 'center')};
   ${({ buttonStyle }) => getButtonStyle(buttonStyle)};
