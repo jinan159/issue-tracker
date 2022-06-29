@@ -1,0 +1,82 @@
+name: Backend Deploy
+
+on:
+  push:
+    branches: [deploy-backend]
+
+jobs:
+  buildAndDeploy:
+    name: Project Build & Test & Deploy
+    runs-on: ubuntu-18.04
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./Backend
+    env:
+      PROJECT_NAME: issue-tracker
+
+    steps:
+      # https://github.com/actions/setup-java#basic
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          java-version: "11"
+          distribution: "temurin"
+          cache: gradle
+
+      # https://github.com/actions/cache/blob/main/examples.md#java---gradle
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: gradle build
+        run: ./gradlew build
+      
+      - name: check API document
+        id: check_api_docs
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "./Backend/build/resources/main/static/docs/index.html"
+
+      - name: gradlew bootJar (if doc not exists)
+        if: steps.check_api_docs.outputs.files_exists == 'false'
+        run: ./gradlew bootJar
+
+      - name: check API document
+        if: steps.check_api_docs.outputs.files_exists == 'false'
+        uses: andstor/file-existence-action@v1
+        with:
+          files: "./Backend/build/resources/main/static/docs/index.html"
+          allow_failure: true
+
+      - name: create zip
+        run: zip -r ./$PROJECT_NAME.zip ./build/libs/*.jar ./scripts/* appspec.yml
+
+      - name: AWS Credential 설정
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+      
+      - name: Upload to AWS S3
+        env: 
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        run: aws s3 cp ./$PROJECT_NAME.zip s3://$AWS_S3_BUCKET/$PROJECT_NAME.zip
+
+      - name: Launch AWS CodeDeploy
+        env: 
+          APPLICATION_NAME: issue-tracker-deploy
+          DEPLOY_GROUP: backend-deploy-group
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        run: aws deploy create-deployment 
+          --application-name $APPLICATION_NAME
+          --deployment-group $DEPLOY_GROUP
+          --s3-location bucket=$AWS_S3_BUCKET,key=$PROJECT_NAME.zip,bundleType=zip
+
+      
