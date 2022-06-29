@@ -2,7 +2,7 @@ import user from '../../../public/image/user1.jpeg';
 import UserImg from '../UserImg';
 import * as S from './style';
 
-function Header() {
+export default function Header() {
   return (
     <S.Container>
       <S.LogoLink to="/">
@@ -12,5 +12,3 @@ function Header() {
     </S.Container>
   );
 }
-
-export default Header;

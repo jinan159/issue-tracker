@@ -36,7 +36,7 @@ export interface StyledButtonProps extends ButtonCustomStyleProps {
   buttonStyle: ButtonStyleType;
 }
 
-function Button({
+export default function Button({
   buttonStyle = 'large',
   contents,
   children,
@@ -56,5 +56,3 @@ function Button({
     </S.Button>
   );
 }
-
-export default Button;

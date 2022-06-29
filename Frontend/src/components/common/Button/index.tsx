@@ -9,7 +9,7 @@ type ButtonProps = {
   children?: JSX.Element | JSX.Element[];
 };
 
-function Button({
+export default function Button({
   type,
   className,
   content,
@@ -29,5 +29,3 @@ function Button({
     </S.Button>
   );
 }
-
-export default Button;

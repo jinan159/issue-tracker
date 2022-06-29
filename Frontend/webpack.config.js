@@ -13,6 +13,7 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.ts'],
     alias: {
       '@': path.resolve(__dirname, 'src'),
+      '@public': path.resolve(__dirname, 'public'),
     },
   },
   entry: path.resolve(__dirname, 'src/index.tsx'),
@@ -37,6 +38,14 @@ module.exports = {
     port: 8080,
     historyApiFallback: true,
     open: true,
+    proxy: {
+      '/login': {
+        target: process.env.SERVER_ENDPOINT,
+      },
+      '/api': {
+        target: process.env.SERVER_ENDPOINT,
+      },
+    },
   },
   module: {
     rules: [

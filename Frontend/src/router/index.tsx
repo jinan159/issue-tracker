@@ -6,7 +6,7 @@ import Loading from '@/pages/Loading';
 import Login from '@/pages/Login';
 import Main from '@/pages/Main';
 
-function Router() {
+export default function Router() {
   return (
     <BrowserRouter>
       <Routes>
@@ -21,5 +21,3 @@ function Router() {
     </BrowserRouter>
   );
 }
-
-export default Router;
