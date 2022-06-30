@@ -1,18 +1,30 @@
 import user from '@public/image/user1.jpeg';
+import React, { useContext } from 'react';
 
+import { CheckedIssueIdContext } from '@/components/IssueTable/CheckedIssueIdProvider';
 import { IssueItemProps } from '@/components/IssueTable/type';
 import Label from '@/components/Label';
 import UserImg from '@/components/UserImg';
 
-import CheckBox from '../../common/CheckBox';
+import CheckBox from '../../CheckBox';
 import * as S from './style';
 
 export default function IssueItem({ issue }: IssueItemProps) {
   const { id, title, createdAt, mileStoneTitle, labels } = issue;
+  const { checkedIssueId, dispatch } = useContext(CheckedIssueIdContext);
+  const checked = checkedIssueId.has(id);
+
+  const handleChangeCheck = () => {
+    if (checked) {
+      dispatch({ type: 'cancel', id });
+      return;
+    }
+    dispatch({ type: 'check', id });
+  };
   return (
     <S.Container>
       <S.Wrapper1>
-        <CheckBox />
+        <CheckBox checked={checked} onChange={handleChangeCheck} />
         <S.Wrapper2>
           <S.Wrapper3>
             <S.Title>{title}</S.Title>

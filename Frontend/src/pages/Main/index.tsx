@@ -68,7 +68,7 @@ export default function Main() {
                 borderDirection="right"
               />
             </S.TapContainer>
-            <Button buttonStyle="smallStandard" contents="이슈작성" />
+            <Button buttonStyle="smallStandard" hasIcon contents="이슈작성" />
           </S.Menus>
         </S.MenuBar>
         <IssueTable />

@@ -4,6 +4,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
 import * as S from './style';
+import Button from '@/components/Button';
 
 const LOGIN_REQUEST_URL = '/login';
 
@@ -65,10 +66,11 @@ export default function Login() {
   return (
     <S.LoginContainer>
       <S.Title>Issue Tracker</S.Title>
-      <S.OauthButton
-        type="button"
-        content="GitHub 계정으로 로그인"
-        handleClick={handleClickLogin}
+      <Button
+        buttonStyle="largeLogin"
+        hasIcon={false}
+        contents="GitHub 계정으로 로그인"
+        onClick={handleClickLogin}
       />
       <S.Content>or</S.Content>
       <S.LoginInput
@@ -82,14 +84,18 @@ export default function Login() {
         onChange={(e) => handleChange(e, 'password')}
       />
       {/* TODO : issue 목록중 하나 선택 예시, 추후 이슈 목록 완성되면 그곳에 Link */}
-      <S.LoginLink to={`/issue/${issueNumber}`}>
-        <S.LoginButton
-          type="button"
-          content="아이디로 로그인"
+      <S.LoginLink
+        to={`/issue/${issueNumber}`}
+        className={`disable-${!isLoginButtonActive}`}
+      >
+        <Button
+          buttonStyle="large"
+          hasIcon={false}
+          contents="아이디로 로그인"
           disabled={!isLoginButtonActive}
         />
       </S.LoginLink>
-      <S.SignUpButton type="button" content="회원가입" />
+      <Button buttonStyle="smallText" hasIcon={false} contents="회원가입" />
     </S.LoginContainer>
   );
 }
