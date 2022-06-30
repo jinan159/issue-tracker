@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Button from '@/components/Button';
 import Tap from '@/components/Tap';
 import useMouse from '@/hooks/useMouse';
@@ -22,14 +23,14 @@ const items = [
 ];
 
 export default function Main() {
-  const [
+  const {
     isMouseOvered,
     isActive,
     handleMouseOver,
     handleMouseOut,
     handleMouseDown,
     handleMouseUp,
-  ] = useMouse(false);
+  } = useMouse(false);
 
   return (
     <>
