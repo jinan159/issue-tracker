@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/issue_tracker
-    username: root
-    password: 1234
+    url: ENC(Ds/iAswKDOI2IBdXVlUbp+1ZYJs/loWNCyGaebesnH+oiH5A+vPEpYY09swmh46cg4LixzDn+SY=)
+    username: ENC(W30pxDFoEU+LniYDtqL3zg==)
+    password: ENC(N/y/BCe1NvxsQe1SNaQArA==)
   h2:
     console:
       enabled: true
