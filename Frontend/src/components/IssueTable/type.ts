@@ -29,9 +29,9 @@ export type IssueType = {
 };
 
 export type IssueData = {
-  openIssueCount?: number;
-  closedIssueCount?: number;
-  issues?: IssueType[];
+  openIssueCount: number;
+  closedIssueCount: number;
+  issues: IssueType[];
 };
 
 export type IssueStatus = 'OPEN' | 'CLOSE';

@@ -1,37 +1,54 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import Button from '@/components/Button';
-import { IssueMenuBarProps } from '@/components/IssueTable/type';
+import { CheckedIssueIdContext } from '@/components/IssueTable/CheckedIssueIdProvider';
+import { IssueMenuBarProps, IssueType } from '@/components/IssueTable/type';
 
-import CheckBox from '../../common/CheckBox';
+import CheckBox from '../../CheckBox';
 import * as S from './style';
 
 function IssueMenuBar({ issueData, setIssueStatus }: IssueMenuBarProps) {
-  const { openIssueCount, closedIssueCount } = issueData;
+  const { openIssueCount, closedIssueCount, issues } = issueData;
+  const { checkedIssueId, dispatch } = useContext(CheckedIssueIdContext);
 
+  const idList = issues.map((issue: IssueType) => issue.id);
+  const allChecked = idList.every((id) => checkedIssueId.has(id));
+
+  const handleChangeAllCheck = () => {
+    if (allChecked) {
+      return dispatch({ type: 'allClear' });
+    }
+    return dispatch({ type: 'allCheck', idList });
+  };
   return (
     <S.Container>
-      <S.Wrapper1>
-        <CheckBox />
+      <S.Wrapper>
+        <CheckBox checked={allChecked} onChange={handleChangeAllCheck} />
         <Button
           buttonStyle="mediumText"
+          hasIcon
           iconType="alert"
           contents={`열린 이슈 (${openIssueCount})`}
           onClick={() => setIssueStatus('OPEN')}
         />
         <Button
           buttonStyle="mediumText"
+          hasIcon
           iconType="archive"
           contents={`닫힌 이슈 (${closedIssueCount})`}
           onClick={() => setIssueStatus('CLOSE')}
         />
-      </S.Wrapper1>
-      <S.Wrapper2>
-        <S.SortButton type="button" content="담당자 ▽" />
-        <S.SortButton type="button" content="레이블 ▽" />
-        <S.SortButton type="button" content="마일스톤 ▽" />
-        <S.SortButton type="button" content="작성자 ▽" />
-      </S.Wrapper2>
+      </S.Wrapper>
+      {checkedIssueId.size > 0 ? (
+        <Button buttonStyle="sort" hasIcon={false} contents="상태 수정 ▽" />
+      ) : (
+        <S.Wrapper>
+          <Button buttonStyle="sort" hasIcon={false} contents="담당자 ▽" />
+          <Button buttonStyle="sort" hasIcon={false} contents="레이블 ▽" />
+          <Button buttonStyle="sort" hasIcon={false} contents="마일스톤 ▽" />
+          <Button buttonStyle="sort" hasIcon={false} contents="작성자 ▽" />
+        </S.Wrapper>
+      )}
     </S.Container>
   );
 }
