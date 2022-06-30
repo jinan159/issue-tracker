@@ -38,7 +38,6 @@ public class Comment extends CommonEntity {
     @NotBlank
     private String content;
 
-
     @Embedded
     private Deleted deleted;
 

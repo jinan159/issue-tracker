@@ -6,6 +6,7 @@ import com.team33.backend.issue.controller.dto.issue.IssueListResponse;
 import com.team33.backend.issue.controller.dto.issue.IssueResponse;
 import com.team33.backend.issue.controller.dto.label.LabelResponse;
 import com.team33.backend.issue.controller.dto.milestone.MilestoneResponse;
+import com.team33.backend.issue.domain.filter.IssueFilter;
 import com.team33.backend.issue.service.IssueService;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -17,6 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -74,12 +76,56 @@ class IssueControllerTest {
                 .queryParam("status", "OPEN"));
 
         // then
+        ResultActions resultActions = performResult.andExpect(status().isOk());
+
+        resultActions.andExpect(jsonPath("$.openIssueCount").value(openIssueCount))
+                .andExpect(jsonPath("$.closedIssueCount").value(closedIssueCount));
+
+        assertIssueResponses(resultActions, response.getIssues());
+    }
+
+    @Test
+    void 열린이슈필터로_조회를_했을때_열린_이슈가_2개_있으면_열린_이슈_2개가_반환된다() throws Exception {
+        // given
+        int openIssueCount = 2;
+        int closedIssueCount = 0;
+
+        List<IssueResponse> issues = List.of(
+                createNewIssueResponse(1, "이슈입니다.", 1, "제이",
+                        1, "마일스톤", 1, "긴급", 1, "제이지"),
+                createNewIssueResponse(2, "이슈입니다.", 2, "제이",
+                        2, "마일스톤", 2, "긴급", 2, "제이지")
+        );
+
+        IssueListResponse response = new IssueListResponse(issues, openIssueCount, closedIssueCount);
+
+        BDDMockito.given(issueService.findAllIssueWithStatusAndFilter(any(), any()))
+                .willReturn(response);
+
+        // when
+        ResultActions performResult = mockMvc.perform(get("/api/issuegroup/1/issues")
+                .queryParam("page", "1")
+                .queryParam("size", "10")
+                .queryParam("status", "OPEN")
+                .queryParam("q", "is:open"));
+
+        // then
         ResultActions resultActions = performResult.andExpect(status().isOk())
                 .andExpect(jsonPath("$.openIssueCount").value(openIssueCount))
                 .andExpect(jsonPath("$.closedIssueCount").value(closedIssueCount));
 
-        for (int i = 0; i < response.getIssues().size(); i++) {
-            IssueResponse issue = response.getIssues().get(i);
+        assertIssueResponses(resultActions, response.getIssues());
+
+        CorsRegistry registry = new CorsRegistry();
+        registry.addMapping("")
+                .allowedOrigins();
+    }
+
+
+
+    private void assertIssueResponses(ResultActions resultActions, List<IssueResponse> issueResponses) throws Exception {
+        for (int i = 0; i < issueResponses.size(); i++) {
+            IssueResponse issue = issueResponses.get(i);
             resultActions.andExpect(jsonPath("$.issues[%d]", i).exists())
                     .andExpect(jsonPath("$.issues[%d].id", i).value(issue.getId()))
                     .andExpect(jsonPath("$.issues[%d].title", i).value(issue.getTitle()))
@@ -115,7 +161,8 @@ class IssueControllerTest {
                     requestParameters(
                             parameterWithName("page").description("현재 페이지"),
                             parameterWithName("size").description("페이지 크기"),
-                            parameterWithName("status").description("이슈 상태")
+                            parameterWithName("status").description("이슈 상태"),
+                            parameterWithName("q").description("이슈 필터 쿼리").optional()
                     ),
                     responseFields(
                             fieldWithPath("openIssueCount").type(JsonFieldType.NUMBER).description("열린 이슈 개수"),

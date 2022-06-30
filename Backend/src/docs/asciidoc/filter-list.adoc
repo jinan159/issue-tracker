@@ -1,0 +1,14 @@
+=== curl
+include::{snippets}/filter-list/curl-request.adoc[]
+
+=== http request
+include::{snippets}/filter-list/http-request.adoc[]
+
+=== http response
+include::{snippets}/filter-list/http-response.adoc[]
+
+=== http response body
+include::{snippets}/filter-list/response-body.adoc[]
+
+=== http response fields
+include::{snippets}/filter-list/response-fields.adoc[]

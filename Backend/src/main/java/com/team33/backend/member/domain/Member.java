@@ -14,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Getter
@@ -24,7 +23,6 @@ public class Member {
     private Long id;
 
     @Column(length = 39)
-    @NotBlank
     private String name;
 
     @NotBlank
@@ -39,24 +37,28 @@ public class Member {
     @OneToMany(mappedBy = "author")
     private List<Issue> issues = new ArrayList<>();
 
-    public Member(String name) {
-        this.name = name;
-        this.deleted = new Deleted();
+    public Member(String githubId) {
+        this.githubId = githubId;
+        this.deleted = initDelete();
     }
 
     public Member(String githubId, String profileImageUrl) {
         this.githubId = githubId;
         this.profileImageUrl = profileImageUrl;
-        this.deleted = new Deleted();
+        this.deleted = initDelete();
     }
 
     public Member(String name, String githubId, String profileImageUrl) {
         this.name = name;
         this.githubId = githubId;
         this.profileImageUrl = profileImageUrl;
-        this.deleted = new Deleted();
+        this.deleted = initDelete();
     }
 
-    public Member() {
+    protected Member() {
+    }
+
+    private Deleted initDelete() {
+        return new Deleted();
     }
 }

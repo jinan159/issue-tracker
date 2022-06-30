@@ -1,0 +1,17 @@
+=== curl
+include::{snippets}/comment-write/curl-request.adoc[]
+
+=== http request
+include::{snippets}/comment-write/http-request.adoc[]
+
+=== http body
+include::{snippets}/comment-write/request-body.adoc[]
+
+=== http response
+include::{snippets}/comment-write/http-response.adoc[]
+
+=== http response body
+include::{snippets}/comment-write/response-body.adoc[]
+
+=== http response fields
+include::{snippets}/comment-write/response-fields.adoc[]

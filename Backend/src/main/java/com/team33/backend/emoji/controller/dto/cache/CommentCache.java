@@ -1,8 +1,7 @@
 package com.team33.backend.emoji.controller.dto.cache;
 
-import com.team33.backend.emoji.controller.dto.cache.EmojiCache;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -17,6 +16,11 @@ public class CommentCache implements Serializable {
     private Set<EmojiCache> emojiCaches;
 
     public CommentCache() {
+    }
+
+    public CommentCache(Long id, String content) {
+        this.id = id;
+        this.content = content;
     }
 
     public void registEmojis(List<EmojiCache> emojis){

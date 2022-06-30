@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface IssueRepository extends JpaRepository<Issue, Long> {
 
-    int countByIssueStatus(IssueStatus issueStatus);
-    List<Issue> findAllByIssueStatus(IssueStatus issueStatus, Pageable pageable);
+    int countByIssueGroupIdAndIssueStatus(long issueGroupId, IssueStatus issueStatus);
+    List<Issue> findAllByIssueGroupIdAndIssueStatus(long issueGroupId, IssueStatus issueStatus, Pageable pageable);
 }
