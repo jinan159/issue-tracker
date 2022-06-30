@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ReactComponent as Alert } from '@/assets/icons/alert-circle.svg';
 import { ReactComponent as BottomArrow } from '@/assets/icons/bottom-arrow.svg';
 import { ReactComponent as Label } from '@/assets/icons/label.svg';
-import { ReactComponent as MileStone } from '@/assets/icons/mileStone.svg';
+import { ReactComponent as MileStone } from '@/assets/icons/milestone.svg';
 import { ReactComponent as Search } from '@/assets/icons/search.svg';
 
 import iconStyle from './constants';
