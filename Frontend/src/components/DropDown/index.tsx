@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable react/require-default-props */
 /* eslint-disable import/no-extraneous-dependencies */
+import { useEffect, useRef, useState } from 'react';
+
 import DropBox from '@/components/DropBox';
 import Filter from '@/components/Filter';
 import useMouse from '@/hooks/useMouse';
@@ -37,8 +39,25 @@ export default function DropDown({
     handleClick,
   } = useMouse(false);
 
+  const [isClickAway, setIsClickAway] = useState(false);
+  const drop = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickAway = (event: MouseEvent) => {
+      setIsClickAway(!drop.current?.contains(event.target as Node));
+    };
+
+    document.addEventListener('click', handleClickAway);
+  }, []);
+
+  useEffect(() => {
+    if (isClickAway && isClicked) {
+      handleClick();
+    }
+  }, [isClickAway, isClicked]);
+
   return (
-    <S.Container width={dropDownWidth} height={dropDownHeight}>
+    <S.Container width={dropDownWidth} height={dropDownHeight} ref={drop}>
       <Filter
         handleMouseOver={handleMouseOver}
         handleMouseOut={handleMouseOut}
