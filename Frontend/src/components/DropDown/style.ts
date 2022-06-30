@@ -15,11 +15,13 @@ export const Container = styled.div<{
 export const Content = styled.div<{
   width?: string | undefined;
   isStartFromRight?: boolean;
+  isClicked: boolean;
 }>`
-  display: none;
+  display: ${({ isClicked }) => (isClicked ? 'block' : 'none')};
+  border-top: 1px solid
+    ${({ theme, isClicked }) => isClicked && theme.colors.greyScale.line};
   position: absolute;
   width: ${({ width }) => width};
-  background: transparent;
   box-shadow: 2px 2px 2px 2px
     ${({ theme }) => theme.colors.greyScale.inputBackground};
   right: ${({ isStartFromRight }) => isStartFromRight && '0'};

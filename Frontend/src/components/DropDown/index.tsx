@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable react/require-default-props */
 /* eslint-disable import/no-extraneous-dependencies */
-import { useId } from 'react';
-
 import DropBox from '@/components/DropBox';
 import Filter from '@/components/Filter';
 import useMouse from '@/hooks/useMouse';
@@ -28,15 +26,16 @@ export default function DropDown({
   itemsTitle,
   items,
 }: DropDownProps) {
-  const id = useId();
-  const [
+  const {
     isMouseOvered,
     isActive,
+    isClicked,
     handleMouseOver,
     handleMouseOut,
     handleMouseDown,
     handleMouseUp,
-  ] = useMouse(false);
+    handleClick,
+  } = useMouse(false);
 
   return (
     <S.Container width={dropDownWidth} height={dropDownHeight}>
@@ -46,12 +45,12 @@ export default function DropDown({
         handleMouseDown={handleMouseDown}
         handleMouseUp={handleMouseUp}
         dropDownTitle={dropDownTitle}
-        dropDownId={`dropdown-${dropDownTitle}-${id}`}
-        dropDownLabelName={`dropdown-label-${dropDownTitle}`}
         isMouseOvered={isMouseOvered}
         isActive={isActive}
+        handleClick={handleClick}
       />
       <S.Content
+        isClicked={isClicked}
         className={`${dropDownTitle}`}
         width={dropBoxWidth}
         isStartFromRight={isStartFromRight}
