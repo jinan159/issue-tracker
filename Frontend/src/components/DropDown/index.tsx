@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 /* eslint-disable react/require-default-props */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -9,14 +10,20 @@ import useMouse from '@/hooks/useMouse';
 
 import * as S from './style';
 
+export interface Item {
+  title: string;
+  keyword: string;
+}
+
 interface DropDownProps {
   dropDownWidth: string;
   dropDownHeight: string;
   dropBoxWidth?: string | undefined;
   dropDownTitle: string;
   itemsTitle: string;
-  items: string[];
+  items: Item[];
   isStartFromRight?: boolean;
+  handleClickDropDown: (keyword: string) => void;
 }
 
 export default function DropDown({
@@ -27,6 +34,7 @@ export default function DropDown({
   isStartFromRight,
   itemsTitle,
   items,
+  handleClickDropDown,
 }: DropDownProps) {
   const {
     isMouseOvered,
@@ -70,11 +78,15 @@ export default function DropDown({
       />
       <S.Content
         isClicked={isClicked}
-        className={`${dropDownTitle}`}
+        className={dropDownTitle}
         width={dropBoxWidth}
         isStartFromRight={isStartFromRight}
       >
-        <DropBox itemsTitle={itemsTitle} items={items} />
+        <DropBox
+          itemsTitle={itemsTitle}
+          items={items}
+          handleClickDropDown={handleClickDropDown}
+        />
       </S.Content>
     </S.Container>
   );
