@@ -1,16 +1,32 @@
+/* eslint-disable no-unused-vars */
 import * as S from './style';
+
+interface Item {
+  title: string;
+  keyword: string;
+}
 
 interface DropBoxProps {
   itemsTitle: string;
-  items: string[];
+  items: Item[];
+  handleClickDropDown: (keyword: string) => void;
 }
 
-export default function DropBox({ itemsTitle, items }: DropBoxProps) {
+export default function DropBox({
+  itemsTitle,
+  items,
+  handleClickDropDown,
+}: DropBoxProps) {
   return (
     <S.ItemContainer>
       {itemsTitle}
-      {items.map((item) => (
-        <S.Item key={`issue-filter-${item}`}>{item}</S.Item>
+      {items.map(({ title, keyword }) => (
+        <S.Item
+          key={`issue-filter-${title}`}
+          onClick={() => handleClickDropDown(keyword)}
+        >
+          {title}
+        </S.Item>
       ))}
     </S.ItemContainer>
   );
