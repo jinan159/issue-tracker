@@ -7,6 +7,11 @@ export const Container = styled.div`
   overflow: hidden;
 `;
 
+export const PageNumContainer = styled.div`
+  margin: 10px 0 50px 0;
+  ${({ theme }) => theme.mixins.flexBox('row', 'center', 'center')};
+`;
+
 export const LoadingSpinner = styled.div`
   margin: 50px auto;
   ${({ theme }) => theme.mixins.flexBox('row', 'center', 'center')};

@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 
 import Button from '@/components/Button';
-import { CheckedIssueIdContext } from '@/components/IssueTable/CheckedIssueIdProvider';
-import { IssueMenuBarProps, IssueType } from '@/components/IssueTable/type';
+import { IssueMenuBarProps } from '@/components/IssueTable/type';
+import { CheckedIssueIdContext } from '@/context/CheckedIssueIdProvider';
+import { IssueType } from '@/context/IssueDataProvider';
 
 import CheckBox from '../../CheckBox';
 import * as S from './style';
@@ -12,7 +13,8 @@ function IssueMenuBar({ issueData, setIssueStatus }: IssueMenuBarProps) {
   const { checkedIssueId, dispatch } = useContext(CheckedIssueIdContext);
 
   const idList = issues.map((issue: IssueType) => issue.id);
-  const allChecked = idList.every((id) => checkedIssueId.has(id));
+  const allChecked =
+    idList.every((id) => checkedIssueId.has(id)) && idList.length !== 0;
 
   const handleChangeAllCheck = () => {
     if (allChecked) {
@@ -36,7 +38,7 @@ function IssueMenuBar({ issueData, setIssueStatus }: IssueMenuBarProps) {
           hasIcon
           iconType="archive"
           contents={`닫힌 이슈 (${closedIssueCount})`}
-          onClick={() => setIssueStatus('CLOSE')}
+          onClick={() => setIssueStatus('CLOSED')}
         />
       </S.Wrapper>
       {checkedIssueId.size > 0 ? (

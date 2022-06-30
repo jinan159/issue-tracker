@@ -49,7 +49,7 @@ export const CheckedIssueIdContext = createContext<CheckedIssueIdContextType>({
 export function CheckedIssueIdProvider({
   children,
 }: {
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
 }) {
   const [checkedIssueId, dispatch] = useReducer(reducer, new Set());
 
