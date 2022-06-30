@@ -1,17 +1,20 @@
 import axios, { AxiosResponse } from 'axios';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
 import * as S from './style';
 import Button from '@/components/Button';
+import { LoginStatusContext } from '@/context/LoginStatusProvider';
 
 const LOGIN_REQUEST_URL = '/login';
 
 export default function Login() {
-  const issueNumber = 1;
-  const [cookies] = useCookies(['refreshToken']);
   const navigate = useNavigate();
+  const [cookies] = useCookies(['refreshToken']);
+  const { loginStatus, setLoginStatus } = useContext(LoginStatusContext);
+
+  const issueNumber = 1;
   const [loginInputValue, setLoginInputValue] = useState({
     id: '',
     password: '',
@@ -49,12 +52,18 @@ export default function Login() {
             refreshToken: `${cookies.refreshToken}`,
           },
         });
+        setLoginStatus({ ...loginStatus, status: true });
         navigate('/main');
       } catch (error: any) {
-        // access token 이 만료 전이지만 기한 갱신
+        // access token 이 만료 전일 경우 로그인
         if (error.response.status === 301) {
+          console.log(error);
           localStorage.setItem('token', error.response.data);
+          setLoginStatus({ ...loginStatus, status: true });
           navigate('/main');
+        } else {
+          console.log(error);
+          alert('로그인 실패');
         }
       }
       return;

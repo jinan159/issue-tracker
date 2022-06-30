@@ -1,9 +1,11 @@
+
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 
 import Button from '@/components/Button';
 import FilterSeatchBar from '@/components/FilterSearchBar';
 import Tap from '@/components/Tap';
+import { IssueDataProvider } from '@/context/IssueDataProvider';
 import useMouse from '@/hooks/useMouse';
 
 import DropDown from '../../components/DropDown';
@@ -44,38 +46,40 @@ export default function Main() {
   return (
     <>
       <Header />
-      <S.Container>
-        <S.MenuBar>
-          <FilterSeatchBar
-            dropDownWidth={dropDownWidth}
-            dropDownHeight={dropDownHeight}
-            dropBoxWidth={dropBoxWidth}
-            dropDownTitle={dropDownTitle[0]}
-            itemsTitle={itemsTitle}
-            items={items}
-            handleClickDropDown={handleClickDropDown}
-          />
-          <S.Menus>
-            <S.TapContainer
-              onMouseOver={handleMouseOver}
-              onMouseOut={handleMouseOut}
-              onMouseDown={handleMouseDown}
-              onMouseUp={handleMouseUp}
-              isMouseOvered={isMouseOvered}
-              isActive={isActive}
-            >
-              <Tap iconType="label" title="레이블" borderDirection="left" />
-              <Tap
-                iconType="mileStone"
-                title="마일스톤"
-                borderDirection="right"
-              />
-            </S.TapContainer>
-            <Button buttonStyle="smallStandard" hasIcon contents="이슈작성" />
-          </S.Menus>
-        </S.MenuBar>
-        <IssueTable />
-      </S.Container>
+      <IssueDataProvider>
+        <S.Container>
+          <S.MenuBar>
+            <FilterSeatchBar
+              dropDownWidth={dropDownWidth}
+              dropDownHeight={dropDownHeight}
+              dropBoxWidth={dropBoxWidth}
+              dropDownTitle={dropDownTitle[0]}
+              itemsTitle={itemsTitle}
+              items={items}
+              handleClickDropDown={handleClickDropDown}
+            />
+            <S.Menus>
+              <S.TapContainer
+                onMouseOver={handleMouseOver}
+                onMouseOut={handleMouseOut}
+                onMouseDown={handleMouseDown}
+                onMouseUp={handleMouseUp}
+                isMouseOvered={isMouseOvered}
+                isActive={isActive}
+              >
+                <Tap iconType="label" title="레이블" borderDirection="left" />
+                <Tap
+                  iconType="mileStone"
+                  title="마일스톤"
+                  borderDirection="right"
+                />
+              </S.TapContainer>
+              <Button buttonStyle="smallStandard" hasIcon contents="이슈작성" />
+            </S.Menus>
+          </S.MenuBar>
+          <IssueTable />
+        </S.Container>
+      </IssueDataProvider>
     </>
   );
 }

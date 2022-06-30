@@ -1,8 +1,9 @@
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import * as S from './style';
+import { LoginStatusContext } from '@/context/LoginStatusProvider';
 
 const LOADING = 'Loading...';
 
@@ -11,6 +12,7 @@ const CALLBACK_URL = '/api/oauth/callback';
 export default function Loading() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { loginStatus, setLoginStatus } = useContext(LoginStatusContext);
 
   useEffect(() => {
     // TODO: 깃헙로그인이 된 이후니까 확인이 필요 없다? 로그인 페이지에서는 별도의 리프레시 토큰 유효기간 확인이 필요 없지 않나.
@@ -20,6 +22,7 @@ export default function Loading() {
         const response = await axios.get(`${CALLBACK_URL}${currentCode}`);
         const newToken = response.data.accessToken;
         localStorage.setItem('token', newToken);
+        setLoginStatus({ ...loginStatus, status: true });
         navigate('/main');
       } catch (error: any) {
         if (error.response) {
