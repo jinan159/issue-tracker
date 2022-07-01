@@ -34,14 +34,14 @@ public class IssueFilterQueryRepository extends QuerydslRepositorySupport {
 
         for (IssueFilter issueFilter : issueFilters) {
             switch (issueFilter) {
-                case OPEN: filteredIssuesQuery.where(issue.issueStatus.eq(IssueStatus.OPEN)); break;
-                case CLOSED: filteredIssuesQuery.where(issue.issueStatus.eq(IssueStatus.CLOSED)); break;
-                case AUTHOR_ME: filteredIssuesQuery.where(issue.author.id.eq(memberId)); break;
-                case COMMENTED_ME: filteredIssuesQuery
+                case OPEN: filteredIssuesQuery = filteredIssuesQuery.where(issue.issueStatus.eq(IssueStatus.OPEN)); break;
+                case CLOSED: filteredIssuesQuery = filteredIssuesQuery.where(issue.issueStatus.eq(IssueStatus.CLOSED)); break;
+                case AUTHOR_ME: filteredIssuesQuery = filteredIssuesQuery.where(issue.author.id.eq(memberId)); break;
+                case COMMENTED_ME: filteredIssuesQuery = filteredIssuesQuery
                         .innerJoin(comment)
                         .on(comment.issue.id.eq(issue.id))
                         .on(comment.member.id.eq(memberId)); break;
-                case ASSIGNED_ME: filteredIssuesQuery
+                case ASSIGNED_ME: filteredIssuesQuery = filteredIssuesQuery
                         .innerJoin(assignee)
                         .on(assignee.issue.id.eq(issue.id))
                         .on(assignee.member.id.eq(memberId)); break;
