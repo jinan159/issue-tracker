@@ -69,6 +69,7 @@ export default function Login() {
       return;
     }
     const url: AxiosResponse = await axios.get(LOGIN_REQUEST_URL);
+    console.log(process.env.SERVER_ENDPOINT);
     window.location.href = url.data;
   };
 

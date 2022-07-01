@@ -40,7 +40,7 @@ module.exports = {
     open: true,
     proxy: {
       '/login': {
-        target: process.env.SERVER_ENDPOINT,
+        target: 'http://3.34.46.187:8080',
       },
       '/api': {
         target: process.env.SERVER_ENDPOINT,
