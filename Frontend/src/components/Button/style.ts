@@ -146,6 +146,7 @@ const createCustomStyle = (props: ButtonCustomStyleProps) => css`
   ${props.fontSize && { 'font-size': props.fontSize }}
   ${props.fontWeight && { 'font-weight': props.fontWeight }}
 `;
+
 export const Button = styled.button<StyledButtonProps>`
   ${({ theme }) => theme.mixins.flexBox('row', 'center', 'center')};
   ${({ buttonStyle }) => getButtonStyle(buttonStyle)};
