@@ -4,8 +4,8 @@ import DropDown from '@/components/DropDown';
 import * as S from './style';
 
 interface Item {
-  title: string;
-  keyword: string;
+  filter: string;
+  description: string;
 }
 
 interface FilterSeatchBarProps {
@@ -15,7 +15,6 @@ interface FilterSeatchBarProps {
   dropDownTitle: string;
   itemsTitle: string;
   items: Item[];
-  handleClickDropDown: (keyword: string) => void;
 }
 
 export default function FilterSeatchBar({
@@ -25,7 +24,6 @@ export default function FilterSeatchBar({
   dropBoxWidth,
   itemsTitle,
   items,
-  handleClickDropDown,
 }: FilterSeatchBarProps) {
   return (
     <S.FilterSearchBarContainer>
@@ -36,7 +34,6 @@ export default function FilterSeatchBar({
         dropDownTitle={dropDownTitle}
         itemsTitle={itemsTitle}
         items={items}
-        handleClickDropDown={handleClickDropDown}
       />
       <S.SearchBar
         type="text"
