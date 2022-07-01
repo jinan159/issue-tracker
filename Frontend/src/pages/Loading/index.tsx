@@ -2,8 +2,9 @@ import axios from 'axios';
 import { useContext, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import * as S from './style';
 import { LoginStatusContext } from '@/context/LoginStatusProvider';
+
+import * as S from './style';
 
 const LOADING = 'Loading...';
 

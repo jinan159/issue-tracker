@@ -3,9 +3,10 @@ import React, { useCallback, useContext, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
-import * as S from './style';
 import Button from '@/components/Button';
 import { LoginStatusContext } from '@/context/LoginStatusProvider';
+
+import * as S from './style';
 
 const LOGIN_REQUEST_URL = '/login';
 

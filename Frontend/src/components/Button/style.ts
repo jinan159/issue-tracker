@@ -133,8 +133,8 @@ const largeLoginStyle = css`
   line-height: 32px;
   ${({ theme }) => getButtonInnerColorStyle(theme.colors.greyScale.offWhite)};
   background: ${({ theme }) => theme.colors.greyScale.titleActive};
-}
 `;
+
 const getButtonStyle = (style: ButtonStyleType) => {
   switch (style) {
     case 'large':
