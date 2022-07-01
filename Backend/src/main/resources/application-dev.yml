@@ -43,8 +43,8 @@ server:
 cloud:
   aws:
     credentials:
-      accessKey: ENC(cdlW4Ga/72wv9nP73rELmBHSClxp0z1T4Hw0RouGTFA=)
-      secretKey: ENC(Qry2IZWVer2nCG3QXwqlqLvoeJk82AdzF4Jwxor51zGKPR3ERd0K+0559Y9Uy4dPH4i2+GkYRYg=)
+      access-key: ENC(o0l7ANej8qA8z7azRUkYXlzm++j1vn9CGctcNjQqhlA=)
+      secret-key: ENC(7gpXJuBBXCEhqpHdX8ZSDzY9mXtG6ShSEB9Hw5FKFrrjtIZ4JymVpwjv1LlFLVPvwpREnwo9Mh0=)
     s3:
       bucket: is-team33
     region:
