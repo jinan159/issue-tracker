@@ -1,4 +1,3 @@
-
 /* eslint-disable no-unused-vars */
 
 import Button from '@/components/Button';
@@ -48,7 +47,6 @@ export default function Main() {
               dropDownTitle={dropDownTitle[0]}
               itemsTitle={itemsTitle}
               items={items}
-              handleClickDropDown={handleClickDropDown}
             />
             <S.Menus>
               <S.TapContainer
