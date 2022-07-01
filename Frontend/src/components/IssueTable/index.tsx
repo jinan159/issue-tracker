@@ -28,11 +28,15 @@ export default function IssueTable() {
   );
 
   useEffect(() => {
+    const token = localStorage.getItem('token');
     const getData = async () => {
       const response: AxiosResponse = await axios.get(
         `${process.env.SERVER_ENDPOINT}/${ISSUE_API_URL}`,
         {
           params: { page: pageNum, pageSize: PAGE_SIZE, status: issueStatus },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
       setIssueData(response.data);

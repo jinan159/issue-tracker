@@ -1,5 +1,8 @@
 /* eslint-disable no-unused-vars */
 import axios, { AxiosResponse } from 'axios';
+import { useContext } from 'react';
+
+import { IssueDataContext } from '@/context/IssueDataProvider';
 
 import * as S from './style';
 
@@ -14,18 +17,24 @@ interface DropBoxProps {
 }
 
 export default function DropBox({ itemsTitle, items }: DropBoxProps) {
+  const { setIssueData } = useContext(IssueDataContext);
   const handleClickDropDown = (keyword: string) => {
     getFilterdIssues(keyword);
   };
 
   const getFilterdIssues = async (keyword: string) => {
+    const token = localStorage.getItem('token');
     const id = 1;
     const response: AxiosResponse = await axios.get(
       `${process.env.SERVER_ENDPOINT}/api/issuegroup/${id}/issues`,
       {
         params: { q: keyword },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
     );
+    setIssueData(response.data);
   };
 
   return (
