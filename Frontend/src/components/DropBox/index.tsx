@@ -1,31 +1,42 @@
 /* eslint-disable no-unused-vars */
+import axios, { AxiosResponse } from 'axios';
+
 import * as S from './style';
 
 interface Item {
-  title: string;
-  keyword: string;
+  filter: string;
+  description: string;
 }
 
 interface DropBoxProps {
   itemsTitle: string;
   items: Item[];
-  handleClickDropDown: (keyword: string) => void;
 }
 
-export default function DropBox({
-  itemsTitle,
-  items,
-  handleClickDropDown,
-}: DropBoxProps) {
+export default function DropBox({ itemsTitle, items }: DropBoxProps) {
+  const handleClickDropDown = (keyword: string) => {
+    getFilterdIssues(keyword);
+  };
+
+  const getFilterdIssues = async (keyword: string) => {
+    const id = 1;
+    const response: AxiosResponse = await axios.get(
+      `${process.env.SERVER_ENDPOINT}/api/issuegroup/${id}/issues`,
+      {
+        params: { q: keyword },
+      }
+    );
+  };
+
   return (
     <S.ItemContainer>
       {itemsTitle}
-      {items.map(({ title, keyword }) => (
+      {items.map(({ description, filter }) => (
         <S.Item
-          key={`issue-filter-${title}`}
-          onClick={() => handleClickDropDown(keyword)}
+          key={`issue-filter-${description}`}
+          onClick={() => handleClickDropDown(filter)}
         >
-          {title}
+          {description}
         </S.Item>
       ))}
     </S.ItemContainer>

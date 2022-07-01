@@ -1,6 +1,5 @@
 
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
 
 import Button from '@/components/Button';
 import FilterSeatchBar from '@/components/FilterSearchBar';
@@ -8,7 +7,6 @@ import Tap from '@/components/Tap';
 import { IssueDataProvider } from '@/context/IssueDataProvider';
 import useMouse from '@/hooks/useMouse';
 
-import DropDown from '../../components/DropDown';
 import Header from '../../components/Header';
 import IssueTable from '../../components/IssueTable';
 import * as S from './style';
@@ -20,11 +18,11 @@ const dropDownTitle = ['필터', '상태수정'];
 const itemsTitle = '이슈필터';
 
 const items = [
-  { title: '열린 이슈', keyword: 'open' },
-  { title: '내가 작성한 이슈', keyword: 'author' },
-  { title: '나에게 작성한 이슈', keyword: 'assignee' },
-  { title: '내가 댓글을 남긴 이슈', keyword: 'comment' },
-  { title: '닫힌 이슈', keyword: 'close' },
+  { description: '열린 이슈', filter: 'is:open' },
+  { description: '내가 작성한 이슈', filter: 'author:@me' },
+  { description: '나에게 작성한 이슈', filter: 'assigned:@me' },
+  { description: '내가 댓글을 남긴 이슈', filter: 'commented:@me' },
+  { description: '닫힌 이슈', filter: 'is:closed' },
 ];
 
 export default function Main() {
@@ -36,12 +34,6 @@ export default function Main() {
     handleMouseDown,
     handleMouseUp,
   } = useMouse(false);
-
-  const [selectedFilter, setSelectedFilter] = useState('');
-
-  const handleClickDropDown = (keyword: string) => {
-    setSelectedFilter(keyword);
-  };
 
   return (
     <>
