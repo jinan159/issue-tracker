@@ -1,25 +1,31 @@
-# Getting Started
+# [BE] issue-tracker
 
-### Reference Documentation
+Github 의 issue 기능과 유사한 서비스를 구현하는것이 목표입니다.
 
-For further reference, please consider the following sections:
+- 소셜 로그인
+- 이슈
+  - 등록
+  - 목록 조회 / 필터링 조회
+  - 수정 / 다중선택 수정
+  - 상세 조회
+- 댓글 기능(등록/수정/삭제/조회)
+- 레이블 관리
+- 마일스톤 관리
+    
+## 1. 인프라 구조
 
-* [Official Gradle documentation](https://docs.gradle.org)
-* [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.7.0/gradle-plugin/reference/html/)
-* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.7.0/gradle-plugin/reference/html/#build-image)
-* [Spring Web](https://docs.spring.io/spring-boot/docs/2.7.0/reference/htmlsingle/#web)
+![](https://camo.githubusercontent.com/c21b4d11b9c3c826b90657c7357ed67ec1aa2e72999e1c96117234d503125cbb/68747470733a2f2f626c6f672e6b616b616f63646e2e6e65742f646e2f6347504736722f6274724535797865374d782f364b566e6841594858584b4e3178584e4946535149302f696d672e706e67)
+그림-1
 
-### Guides
+### 1.1 FE 배포 과정
 
-The following guides illustrate how to use some features concretely:
+1. Github Action 에서 Webpack 빌드로 html 생성
+2. S3 에 업로드
+3. CloudFront 캐시 리프레시
 
-* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
-* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
-* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
+### 1.2 BE 배포 과정
 
-### Additional Links
-
-These additional references should also help you:
-
-* [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
-
+1. Github Action 에서 jar 빌드
+2. S3 에 업로드
+3. CodeDeploy 배포 실행
+4. EC2 에서 jar 실행
